@@ -1,0 +1,108 @@
+.custom-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #bbbbbbb7;
+  backdrop-filter: blur(5px);
+  border-color: #fff;
+  border-width: 5px;
+  border-radius: 8px;
+  padding: 25px;
+  width: 750px;
+}
+
+.custom-input {
+  position: relative;
+  font-size: 18px;
+  padding: var(--field-padding);
+  border-radius: 3px;
+  margin-right: 10px;
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+
+.custom-input input {
+  appearance: none;
+  background: #d4d4d4;
+  color: rgb(26, 26, 26);
+  border-color: rgba(94, 94, 94, 0.575);
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  width: 250px;
+  height: 50px;
+  outline: none;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-bottom: 16px;
+}
+
+.custom-input .placeholder {
+  position: absolute;
+  left: var(--field-padding);
+  width: calc(100% - (var(--field-padding) * 2));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  top: 30px;
+  background: transparent;
+  margin-top: 3px;
+  margin-left: 18px;
+  line-height: 100%;
+  transform: translateY(-50%);
+  color: rgb(36, 36, 36);
+  transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+
+.custom-input input:focus + .placeholder,
+.custom-input input:valid + .placeholder {
+  top: -2px;
+  font-size: 16px;
+  padding: 0px 5px 0px 5px;
+  margin-left: 10px;
+}
+
+.custom-input input:valid,
+.custom-input input:focus {
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+
+.custom-input input + .placeholder {
+  padding: 0.5px;
+  left: 8px;
+}
+
+/* .custom-input input:valid + placeholder,
+.custom-input input:focus + placehold {
+  top: 10px;
+} */
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.custom-button {
+  background-color: #1574f1;
+  padding: 8px 20px;
+  transition: all 0.3s ease-out;
+  border-radius: 8px;
+  border-style: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  width: 275px;
+  height: 75px;
+}
+
+.custom-button:hover {
+  background-color: #fff;
+  cursor: pointer;
+  border-color: #242424;
+  color: #242424;
+  border-width: 5px;
+}
