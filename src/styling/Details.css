@@ -5,10 +5,6 @@
     border-style: outset;
     overflow: hidden;
     flex-direction: column;
-    /* justify-content: center; */
-    /* 
-    
-     */
   }
   .home-container2 {
     padding: 20px;

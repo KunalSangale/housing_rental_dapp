@@ -44,7 +44,7 @@ const Details=({item})=>{
                 <FeatureCard title={"Dec 6 2022"} description={"Posted On"}></FeatureCard>
                 <FeatureCard title={"Yes"} description={"Balcony"}></FeatureCard>
                 <FeatureCard title={"<10"} description={"Age of Building"}></FeatureCard>
-                <FeatureCard title={"Area"} description={"500sqft"}></FeatureCard>
+                <FeatureCard title={"Area"} description={"500 sqft"}></FeatureCard>
             </div>
           </div>
         </div>
