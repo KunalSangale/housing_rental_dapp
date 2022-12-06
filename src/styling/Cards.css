@@ -77,7 +77,15 @@ h2 {
   padding-top: 67%;
   overflow: hidden;
 }
-
+.cards_overview{
+  display: flex;
+  flex: 2 0 50%;
+  max-width: 500px;
+  margin: 0 1rem;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  background:"black"
+}
 .fade-img {
   animation-name: fade-img;
   animation-duration: 2s;
