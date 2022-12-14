@@ -6,9 +6,9 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Landlord from "./pages/Landlord";
+import ListingsPage from "./pages/ListingsPage";
 import { AppContextProvider } from "./AppContext";
 import Details from "./pages/Details";
-
 function getLibrary(provider) {
   return new ethers.providers.Web3Provider(provider);
 }
@@ -27,6 +27,7 @@ const App = () => {
               <Route path="/" exact element={<Home />} />
               <Route path="/landlord" element={<Landlord />} />
               <Route path="/details" element={<Details />} />
+              <Route path="/listingsPage" element={<ListingsPage />} />
             </Routes>
           </Router>
         </div>

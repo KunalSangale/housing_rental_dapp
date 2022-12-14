@@ -24,6 +24,10 @@ const ListingItem = ({ item }) => {
     deposit,
     term,
     startDate,
+    //area,
+    // bhk,
+    // bathrooms,
+    // preferredTenant,
 _,
     state,
   } = item;

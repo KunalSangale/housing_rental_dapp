@@ -7,7 +7,7 @@ function Landlord() {
   return (
     <>
       <Rentals />
-      <Listings />
+      {/* <Listings /> */}
     </>
   );
 }

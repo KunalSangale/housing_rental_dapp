@@ -25,8 +25,6 @@ export const useRental = () => {
     cid,
     rent,
     deposit,
-    term,
-    startDate
   ) => {
     if (account && isValidNetwork) {
       try {
@@ -37,8 +35,6 @@ export const useRental = () => {
           cid,
           rent,   
           deposit,
-          term,
-          startDate,
           { from: account }
         );
         await txn.wait(1);

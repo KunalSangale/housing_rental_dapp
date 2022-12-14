@@ -16,17 +16,20 @@ contract Rentals is Ownable {
     string cid;
     State state;
     uint rent; 
-    uint term;
-    string startDate;
     uint deposit;
     address payable landlord;
     address payable tenant;
   }
-
+  struct UnitDetails {
+    uint area;
+    uint bhk;
+    uint bathrooms;
+    string preferredTenant;
+  }
 
   // <units mapping>
   mapping (uint => Unit) public units;
-
+mapping (uint => UnitDetails) public unitDetails;
 
   // <enum State: Vacant, Occupied>
   enum State { ForRent, Occupied}
@@ -49,9 +52,7 @@ contract Rentals is Ownable {
     string memory _unitAddress, 
     string memory _cid,
     uint _rent, 
-    uint _deposit,
-    uint _term, 
-    string memory _startDate
+    uint _deposit
     ) onlyOwner public  {
    
 
@@ -62,8 +63,6 @@ contract Rentals is Ownable {
      state: State.ForRent,
      rent: _rent,
      deposit: _deposit,
-     term: _term,
-     startDate: _startDate,
      landlord: payable(msg.sender),
      tenant: payable(address(0))
     });
@@ -71,10 +70,21 @@ contract Rentals is Ownable {
     emit LogUnitAdded(unitCount);
     emit LogForRent(unitCount);
     unitCount = unitCount + 1;
-    
   
   }
-
+   function addUnitDetails(
+      uint _area,
+      uint _bhk,
+      uint _bathrooms,
+      string memory _preferredTenant
+    ) onlyOwner public {
+        unitDetails[unitCount]=UnitDetails({
+          area: _area,
+          bhk: _bhk,
+          bathrooms: _bathrooms,
+          preferredTenant: _preferredTenant
+        });
+    }
   
 
   /// @notice Allows landlord/tenant to fetch the details of a unit
@@ -87,8 +97,6 @@ contract Rentals is Ownable {
         uint state, 
         uint rent, 
         uint deposit,
-        uint term, 
-        string memory startDate, 
         address landlord, 
         address tenant
         )  
@@ -99,11 +107,23 @@ contract Rentals is Ownable {
       state = uint(units[_unitNumber].state); 
       rent = units[_unitNumber].rent;
       deposit = units[_unitNumber].deposit;
-      term = units[_unitNumber].term;
-      startDate = units[_unitNumber].startDate; 
       landlord = units[_unitNumber].landlord; 
       tenant = units[_unitNumber].tenant; 
-      return (unitNumber, unitAddress ,cid, state,rent, deposit, term, startDate,  landlord, tenant); 
+      return (unitNumber, unitAddress ,cid, state,rent, deposit,landlord, tenant); 
     } 
+  function fetchUnitDetails(uint _unitNumber) public view
+      returns(
+          uint area,
+          uint bhk,
+          uint bathrooms,
+          string memory preferredTenant
+      )
+    {
+        area= unitDetails[_unitNumber].area;
+      bhk = unitDetails[_unitNumber].bhk;
+      bathrooms = unitDetails[_unitNumber].bathrooms;
+      preferredTenant = unitDetails[_unitNumber].preferredTenant;
+    }
+
   
 }

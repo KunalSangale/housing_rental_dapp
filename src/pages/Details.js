@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import {Link} from "react-router-dom";
 import { formatEther } from "@ethersproject/units";
 import {BigNumber} from "@ethersproject/bignumber";
+import RentalsABI from "../../contracts/Rentals.json";
 import { UnitContext } from "../hooks/useUnitInfo";
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 const Details=({item})=>{
@@ -37,14 +38,14 @@ const Details=({item})=>{
         <div className="home-container3">
           <div className="home-features">
             <div className="home-container4">
-            <FeatureCard title={"1 Bedroom"} description={"Number of Bedrooms"}></FeatureCard>
-                <FeatureCard title={"1 Bathroom"} description={"Number of Bathrooms"}></FeatureCard>
+            <FeatureCard title={3} description={"Number of Bedrooms"}></FeatureCard>
+                <FeatureCard title={2} description={"Number of Bathrooms"}></FeatureCard>
                 <FeatureCard title={"Immediately"} description={"Possession"}></FeatureCard>
                 <FeatureCard title={"Family"} description={"Preferred Tenant"}></FeatureCard>
                 <FeatureCard title={"Dec 6 2022"} description={"Posted On"}></FeatureCard>
                 <FeatureCard title={"Yes"} description={"Balcony"}></FeatureCard>
                 <FeatureCard title={"<10"} description={"Age of Building"}></FeatureCard>
-                <FeatureCard title={"Area"} description={"500 sqft"}></FeatureCard>
+                <FeatureCard title={data.area} description={"Area"}></FeatureCard>
             </div>
           </div>
         </div>

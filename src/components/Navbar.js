@@ -37,6 +37,15 @@ function Navbar() {
                 LANDLORD
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                to="/listingsPage"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                LISTINGS
+              </Link>
+            </li>
           </ul>
           {button && (
             <MetamaskConnectButton className="navbar-connect">

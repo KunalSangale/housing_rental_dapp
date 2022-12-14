@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useContract } from "../../hooks/useContract";
 import { parseEther } from "@ethersproject/units";
+import ToggleSwitch from "./ToggleSwitch";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Spinner } from "react-bootstrap";
 import { colors } from "../../theme";
 import { Button } from "../button";
@@ -33,13 +36,22 @@ const Rentals = () => {
     deposit: "",
     term: "",
     startDate: "",
+    area:"",
+    bhk:"",
+    bathrooms:"",
+    preferredTenant:"",
   });
   const [mmError, setMmError] = useState(null);
   const [txHash, setTxHash] = useState(null);
   const { active, account, chainId } = useWeb3React();
   const rentalsAddress = RentalsABI.networks[1337].address;
   const contract = new useContract(rentalsAddress, RentalsABI.abi);
+  const [radioValue, setRadioValue] = useState('1');
 
+  const radios = [
+    { name: 'Yes', value: '1' },
+    { name: 'No', value: '0' },
+  ];
   const handleInputChange = (event) => {
     setUnit({ ...unit, [event.target.name]: event.target.value });
   };
@@ -86,8 +98,12 @@ async function storeFiles () {
         deposit: "",
         term: "",
         startDate: "",
+        area:""
+        // bhk:"",
+        // bathrooms:"",
+        // preferredTenant:""
       });
-      const { unitAddress ,rent, deposit, term, startDate } = unit;
+      const { unitAddress ,rent, deposit, term, startDate,area} = unit;
       const txn = await contract.addUnit(
         unitAddress,
         String(cid),
@@ -95,6 +111,10 @@ async function storeFiles () {
         parseEther(deposit),
         term,
         startDate,
+        area,
+        // bhk,
+        // bathrooms,
+        // preferredTenant,
         {
           from: account,
         }
@@ -205,6 +225,81 @@ async function storeFiles () {
                 <span className="placeholder"> Start Date </span>
               </label>
               <input type="file" accept="image/*" name="img"/>
+              <label className="custom-input">
+                <input
+                  type="text"
+                  //value={unit.bhk.bhk}
+                  name="BHK"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder"> Number of bedrooms</span>
+              </label>
+              <label className="custom-input">
+                <input
+                  type="text"
+                  //value={unit.bathrooms.bathrooms}
+                  name="bathrooms"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder"> Number of bathrooms</span>
+              </label>
+              <label className="custom-input">
+                <input
+                  type="int"
+                  value={unit.area.area}
+                  name="area"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder">Area (sqft)</span>
+              </label>
+              <label className="custom-input">
+                <input
+                  type="int"
+                  // value={unit.floor.floor}
+                  name="area"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder">Floor</span>
+              </label>
+              <label className="custom-input">
+                <input
+                  type="text"
+                  //value={unit.preferredTenant.preferredTenant}
+                  name="area"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder">Preferred Tenant</span>
+              </label>
+              {/* <label>
+              <ButtonGroup>
+              <span className="placeholder">Balcony?</span>
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant={idx % 2 ? 'outline-danger' : 'outline-success'}
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+      
+      </label> */}
               <div className="button-container">
                 <button type="submit" className="custom-button">
                   LIST PROPERTY
