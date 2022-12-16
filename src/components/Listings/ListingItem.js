@@ -22,9 +22,7 @@ const ListingItem = ({ item }) => {
     cid,
     rent,
     deposit,
-    term,
-    startDate,
-    //area,
+    area,
     // bhk,
     // bathrooms,
     // preferredTenant,
@@ -53,16 +51,14 @@ _,
               <h5>Unit Address: </h5>
               <h5>Rent: </h5>
               <h5>Deposit: </h5>
-              <h5>Lease Term: </h5>
-              <h5>Start Date: </h5>
+              <h5>Area: </h5>
             </div>
             <div className="cards__item__values">
               <h5>{unitNumber.toNumber()}</h5>
               <h5> {unitAddress}</h5>
               <h5>{formatEther(rent)} ETH/mo</h5>
               <h5>{formatEther(deposit)} ETH</h5>
-              <h5>{term.toNumber()} Months</h5>
-              <h5> {startDate}</h5>
+              <h5>{area.toNumber()} sqft</h5>
             </div>
           </div>
         </div>{" "}

@@ -38,14 +38,14 @@ const Details=({item})=>{
         <div className="home-container3">
           <div className="home-features">
             <div className="home-container4">
-            <FeatureCard title={3} description={"Number of Bedrooms"}></FeatureCard>
-                <FeatureCard title={2} description={"Number of Bathrooms"}></FeatureCard>
+            <FeatureCard title={parseInt(data.bhk._hex,16)} description={"Number of Bedrooms"}></FeatureCard>
+                <FeatureCard title={parseInt(data.bathrooms._hex,16)} description={"Number of Bathrooms"}></FeatureCard>
                 <FeatureCard title={"Immediately"} description={"Possession"}></FeatureCard>
                 <FeatureCard title={"Family"} description={"Preferred Tenant"}></FeatureCard>
-                <FeatureCard title={"Dec 6 2022"} description={"Posted On"}></FeatureCard>
+                <FeatureCard title={data.reraNumber} description={"RERA Number"}></FeatureCard>
                 <FeatureCard title={"Yes"} description={"Balcony"}></FeatureCard>
                 <FeatureCard title={"<10"} description={"Age of Building"}></FeatureCard>
-                <FeatureCard title={data.area} description={"Area"}></FeatureCard>
+                <FeatureCard title={parseInt(data.area._hex,16)} description={"Area"}></FeatureCard>
             </div>
           </div>
         </div>
@@ -55,8 +55,8 @@ const Details=({item})=>{
                 <div className="home-container1">
                 <FeatureCard title={"Unit Number"} description={parseInt(data.unitNumber._hex,16)}></FeatureCard>
                 <FeatureCard title={"Unit Address"} description={data.unitAddress}></FeatureCard>
-                <FeatureCard title={"Rent"} description={formatEther(BigNumber.from(parseInt(data.rent._hex,16).toString()))}></FeatureCard>
-                <FeatureCard title={"Deposit"} description={formatEther(BigNumber.from(parseInt(data.deposit._hex,16).toString()))}></FeatureCard>
+                <FeatureCard title={"Rent"} description={formatEther(BigNumber.from(parseInt(data.rent._hex,16).toString()))+" ETH per month"} ></FeatureCard>
+                <FeatureCard title={"Deposit"} description={formatEther(BigNumber.from(parseInt(data.deposit._hex,16).toString()))+" ETH"}></FeatureCard>
                 <FeatureCard title={"Water Supply"} description={"Corporation"}></FeatureCard>
                 <FeatureCard title={"Gated Security"} description={"Yes"}></FeatureCard>
                 <FeatureCard title={"Floor"} description={"6"}></FeatureCard>

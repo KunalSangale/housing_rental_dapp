@@ -2,11 +2,13 @@ import React from "react";
 import { Web3ReactProvider } from "@web3-react/core";
 import { ethers } from "ethers";
 import "./App.css";
+import "./index.css";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Landlord from "./pages/Landlord";
 import ListingsPage from "./pages/ListingsPage";
+import Verify from "./pages/Verify";
 import { AppContextProvider } from "./AppContext";
 import Details from "./pages/Details";
 function getLibrary(provider) {
@@ -28,6 +30,7 @@ const App = () => {
               <Route path="/landlord" element={<Landlord />} />
               <Route path="/details" element={<Details />} />
               <Route path="/listingsPage" element={<ListingsPage />} />
+              <Route path="/verify" element={<Verify />} />
             </Routes>
           </Router>
         </div>

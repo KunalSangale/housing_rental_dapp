@@ -37,9 +37,9 @@ const Rentals = () => {
     term: "",
     startDate: "",
     area:"",
-    bhk:"",
-    bathrooms:"",
-    preferredTenant:"",
+    bhk: "",
+    bathrooms: "",
+    reraNumber: ""
   });
   const [mmError, setMmError] = useState(null);
   const [txHash, setTxHash] = useState(null);
@@ -96,24 +96,22 @@ async function storeFiles () {
         unitAddress: "",
         rent: "",
         deposit: "",
-        term: "",
-        startDate: "",
-        area:""
-        // bhk:"",
-        // bathrooms:"",
+        area:"",
+        bhk:"",
+        bathrooms:"",
+        reraNumber: ""
         // preferredTenant:""
       });
-      const { unitAddress ,rent, deposit, term, startDate,area} = unit;
+      const { unitAddress ,rent, deposit,area,bhk,bathrooms,reraNumber} = unit;
       const txn = await contract.addUnit(
         unitAddress,
         String(cid),
         parseEther(rent),
         parseEther(deposit),
-        term,
-        startDate,
         area,
-        // bhk,
-        // bathrooms,
+        bhk,
+        bathrooms,
+        reraNumber,
         // preferredTenant,
         {
           from: account,
@@ -166,8 +164,19 @@ async function storeFiles () {
                   onChange={handleInputChange}
                   required
                 />
-
+                
                 <span className="placeholder"> Unit Number </span>
+              </label>
+              <label className="custom-input">
+                <input
+                  type="text"
+                  value={unit.reraNumber.reraNumber}
+                  name="reraNumber"
+                  autoComplete="off"
+                  onChange={handleInputChange}
+                  required
+                />
+                <span className="placeholder">RERA Number</span>
               </label>
               <label className="custom-input">
                 <input
@@ -202,34 +211,16 @@ async function storeFiles () {
                 />
                 <span className="placeholder"> Deposit </span>
               </label>
+              
               <label className="custom-input">
-                <input
-                  type="int"
-                  value={unit.term.term}
-                  name="term"
-                  autoComplete="off"
-                  onChange={handleInputChange}
-                  required
-                />
-                <span className="placeholder"> Term </span>
-              </label>
-              <label className="custom-input">
-                <input
-                  type="text"
-                  value={unit.startDate.startDate}
-                  name="startDate"
-                  autoComplete="off"
-                  onChange={handleInputChange}
-                  required
-                />
-                <span className="placeholder"> Start Date </span>
-              </label>
               <input type="file" accept="image/*" name="img"/>
+              <span className="placeholder">Choose Image</span>
+              </label>
               <label className="custom-input">
                 <input
                   type="text"
-                  //value={unit.bhk.bhk}
-                  name="BHK"
+                  value={unit.bhk.bhk}
+                  name="bhk"
                   autoComplete="off"
                   onChange={handleInputChange}
                   required
@@ -239,7 +230,7 @@ async function storeFiles () {
               <label className="custom-input">
                 <input
                   type="text"
-                  //value={unit.bathrooms.bathrooms}
+                  value={unit.bathrooms.bathrooms}
                   name="bathrooms"
                   autoComplete="off"
                   onChange={handleInputChange}
@@ -262,24 +253,24 @@ async function storeFiles () {
                 <input
                   type="int"
                   // value={unit.floor.floor}
-                  name="area"
+                  name="floor"
                   autoComplete="off"
                   onChange={handleInputChange}
                   required
                 />
                 <span className="placeholder">Floor</span>
               </label>
-              <label className="custom-input">
+              {/* <label className="custom-input">
                 <input
-                  type="text"
-                  //value={unit.preferredTenant.preferredTenant}
-                  name="area"
+                  type="radio"
+                  // value={unit.floor.floor}
+                  name="furnished"
                   autoComplete="off"
                   onChange={handleInputChange}
                   required
                 />
-                <span className="placeholder">Preferred Tenant</span>
-              </label>
+                <span className="placeholder">Furnishing Status</span>
+              </label> */}
               {/* <label>
               <ButtonGroup>
               <span className="placeholder">Balcony?</span>

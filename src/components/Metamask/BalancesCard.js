@@ -8,7 +8,9 @@ import "../../styling/BalanceCard.css";
 const BalanceCard = () => {
   const { active, account } = useWeb3React();
   const { fetchEthBalance, ethBalance } = useEth();
-
+  const addressShorten = address =>{
+    return address.substring(0,6)+"..."+address.substring(address.length - 5,address.length - 1)
+  }
   useEffect(() => {
     if (account) {
       fetchEthBalance();
@@ -28,7 +30,7 @@ const BalanceCard = () => {
         </Text>
       </div>
       <div className="balance-column2">
-        <Text >{account}</Text>
+        <Text >{addressShorten(account)}</Text>
         <Text >
         <i className="fab fa-ethereum"></i>{" "}{ethBalance} 
         </Text>

@@ -46,6 +46,15 @@ function Navbar() {
                 LISTINGS
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                to="/verify"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                KYC
+              </Link>
+            </li>
           </ul>
           {button && (
             <MetamaskConnectButton className="navbar-connect">

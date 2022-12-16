@@ -54,6 +54,7 @@ const Listings = () => {
         ids.push(idNumber);
       }
       const arr = await Promise.all(ids.map((id) => contract.units(id)));
+      //const details=await Promise.all(ids.map((id) =>contract.unitDetails(id)));
       setListings(arr);
       setStatus(listingState.READY);
     } catch (error) {
