@@ -10,6 +10,7 @@ import "../../styling/Units.css";
 import "../../styling/AddUnit.css";
 import "../../styling/button.css";
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
+import Navbar from '../Navbar'
 
 import RentalsABI from "../../contracts/Rentals.json";
 
@@ -131,6 +132,8 @@ async function storeFiles () {
   const { LOADING, WAITING, READY, LISTED, ERROR } = DetailsState;
 
   return (
+    <>
+    <Navbar />
     <div className="units">
       <div className="addunit__container">
         <h1>List Your Property</h1>
@@ -337,6 +340,8 @@ async function storeFiles () {
 
       <hr />
     </div>
+    </>
+
   );
 };
 

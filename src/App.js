@@ -1,5 +1,6 @@
 import './App.css';
 import React from "react";
+import { Provider } from 'react-redux'
 import { Web3ReactProvider } from "@web3-react/core";
 import { ethers } from "ethers";
 import "./index.css";
@@ -9,6 +10,7 @@ import Landlord from "./pages/Landlord";
 import ListingsPage from "./pages/ListingsPage";
 import Verify from "./pages/Verify";
 import Details from "./pages/Details";
+import store from './store'
 function getLibrary(provider) {
   return new ethers.providers.Web3Provider(provider);
 }
@@ -18,6 +20,7 @@ const App = () => {
     window.ethereum.on("chainChanged", () => window.location.reload());
   }
   return (
+    <Provider store={store}>
       <Web3ReactProvider getLibrary={getLibrary}>
         <div>
           <Router>
@@ -31,6 +34,7 @@ const App = () => {
           </Router>
         </div>
       </Web3ReactProvider>
+    </Provider>
   );
 };
 

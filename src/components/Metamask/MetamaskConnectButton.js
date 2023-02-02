@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../connectors";
-import { Button } from "../button";
+// import { Button } from "../button";
 import "../../styling/button.css";
 import "../../styling/Navbar.css";
 
@@ -20,7 +20,7 @@ const onLogOut = (deactivate, cb) => {
 
 const MetamaskConnectButton = () => {
   const navigate = useNavigate();
-  const { setContentError } = useAppContext();
+  // const { setContentError } = useAppContext();
   const { activate, active, account, deactivate } = useWeb3React();
   const [status, setStatus] = useState(pageState.LOADING);
 
@@ -36,34 +36,34 @@ const MetamaskConnectButton = () => {
 
   if (status === pageState.LOADING || (status === pageState.READY && !active)) {
     return (
-      <Button
+      <div
         buttonStyle="btn--outline"
         onClick={() => {
           if (!window.ethereum) {
-            setContentError(
-              "Looks like you don't have Metamask, you'll need it to use this app."
-            );
+            // setContentError(
+            //   "Looks like you don't have Metamask, you'll need it to use this app."
+            // );
             return;
           }
           activate(injected, (e) => {
             if (e instanceof UnsupportedChainIdError) {
-              setContentError("Network not supported.");
+              // setContentError("Network not supported."); 
             }
           });
         }}
       >
         CONNECT
-      </Button>
+      </div>
     );
   }
 
   return (
-    <Button
+    <div
       buttonStyle="btn--outline"
       onClick={() => onLogOut(deactivate, () => navigate("/"))}
     >
       LOG OUT
-    </Button>
+    </div>
   );
 };
 

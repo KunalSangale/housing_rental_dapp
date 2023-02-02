@@ -32,9 +32,8 @@ export default () => {
                 const signer = provider.getSigner();
                 const signature = await signer.signMessage("nonce:" + result);
                 const address = await signer.getAddress();
-                const rawResponse = await fetch('http://localhost/api/authenticate', {
+                const rawResponse = await fetch('http://localhost/api/authenticate  ', {
                     method: 'POST',
-                    mode:'no-cors',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'

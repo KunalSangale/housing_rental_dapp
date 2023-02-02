@@ -62,7 +62,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -95,7 +96,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -169,7 +171,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -291,7 +294,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"unitNumber\",\"type\":\"uint256\"}],\"name\":\"LogForRent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"unitNumber\",\"type\":\"uint256\"}],\"name\":\"LogUnitAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_unitAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_rent\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_area\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_bhk\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_bathrooms\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_reraNumber\",\"type\":\"string\"}],\"name\":\"addUnit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unitNumber\",\"type\":\"uint256\"}],\"name\":\"fetchUnit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"unitNumber\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"unitAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"state\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rent\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"area\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bhk\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bathrooms\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"reraNumber\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"landlord\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tenant\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unitCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"units\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"unitNumber\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"unitAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"enum Rentals.State\",\"name\":\"state\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"rent\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"area\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bhk\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bathrooms\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"reraNumber\",\"type\":\"string\"},{\"internalType\":\"address payable\",\"name\":\"landlord\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"tenant\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"LogForRent(uint256)\":{\"params\":{\"unitNumber\":\"Unit Number requiring state change\"}}},\"kind\":\"dev\",\"methods\":{\"addUnit(string,string,uint256,uint256,uint256,uint256,uint256,string)\":{\"details\":\"The landlord adding the unit must be the owner of the contract The unit number is automatically assigned\",\"params\":{\"_unitAddress\":\"Address of the unit being listed\"}},\"fetchUnit(uint256)\":{\"params\":{\"_unitNumber\":\"The unit number to be fetched\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"events\":{\"LogForRent(uint256)\":{\"notice\":\"Emitted when a unit is added and listed of rent\"},\"LogUnitAdded(uint256)\":{\"notice\":\"Emitted when a unit is added \"}},\"kind\":\"user\",\"methods\":{\"addUnit(string,string,uint256,uint256,uint256,uint256,uint256,string)\":{\"notice\":\"Adds a unit under the ownership of a landlord \"},\"fetchUnit(uint256)\":{\"notice\":\"Allows landlord/tenant to fetch the details of a unit\"},\"unitCount()\":{\"notice\":\"Emitted when a new unit is added to the contract\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Rentals.sol\":\"Rentals\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2\",\"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"project:/contracts/Rentals.sol\":{\"keccak256\":\"0x1708ec3e7d0185d62b3a4ab201998e74e922ede6194f385d71e8b1384d29a04a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://766d807e34d70293f40c791107cbce04eb7d88cbff9c134341f9d0d6bfafb381\",\"dweb:/ipfs/Qma2ujYDZ3MRAsUJodAT2Ebsrok2z9p9hm7JYFqUpwYyDS\"]}},\"version\":1}",
@@ -13345,9 +13349,17 @@
     "name": "solc",
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1337": {
+      "events": {},
+      "links": {},
+      "address": "0xb6E671833e6a07C357f96f9011A52Fa6e7847c9C",
+      "transactionHash": "0x5fd6b4a8f353ae8dfb8eac64c09dd6c4be33aabb351bc1a68f531a36ad10e162"
+    }
+  },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-02T15:28:53.867Z",
+  "updatedAt": "2023-02-02T18:19:38.969Z",
+  "networkType": "ethereum",
   "devdoc": {
     "events": {
       "LogForRent(uint256)": {

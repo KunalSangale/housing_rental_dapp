@@ -7,7 +7,7 @@ import { Spinner } from "react-bootstrap";
 import { colors } from "../../theme";
 import "../../styling/Cards.css";
 import "../../styling/UnitCard.css";
-
+import Navbar from '../Navbar'
 import RentalsABI from "../../contracts/Rentals.json";
 
 const listingState = {
@@ -84,6 +84,8 @@ const Listings = () => {
   }
 
   return (
+    <>
+    <Navbar />
     <div className="card">
       <h1>Units available for rent</h1>
       <div className="cards__container">
@@ -99,6 +101,7 @@ const Listings = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
