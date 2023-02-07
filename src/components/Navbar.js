@@ -5,26 +5,22 @@ import BalancesCard from "./Metamask/BalancesCard";
 import "../styling/Navbar.css";
 
 function Navbar() {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+  // const [click, setClick] = useState(false);
+  // const handleClick = () => setClick(!click);
 
-  const handleClick = () => setClick(!click);
-
-  const closeMobileMenu = () => setClick(false);
+  // const closeMobileMenu = () => setClick(false);
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="navbar-container">
-          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+          <Link to="/" className="navbar-logo">
             Rental
           </Link>
-          <div>
-            <BalancesCard />
-          </div>
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
+          
+          <ul className={ "nav-menu"}>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <Link to="/" className="nav-links">
                 HOME
               </Link>
             </li>
@@ -32,7 +28,7 @@ function Navbar() {
               <Link
                 to="/landlord"
                 className="nav-links"
-                onClick={closeMobileMenu}
+
               >
                 LANDLORD
               </Link>
@@ -41,7 +37,6 @@ function Navbar() {
               <Link
                 to="/listingsPage"
                 className="nav-links"
-                onClick={closeMobileMenu}
               >
                 LISTINGS
               </Link>
@@ -50,17 +45,18 @@ function Navbar() {
               <Link
                 to="/verify"
                 className="nav-links"
-                onClick={closeMobileMenu}
               >
                 KYC
               </Link>
             </li>
           </ul>
-          {button && (
-            <MetamaskConnectButton className="navbar-connect">
+          <div>
+            <BalancesCard />
+          </div>
+            {/* <MetamaskConnectButton className="navbar-connect">
               {" "}
-            </MetamaskConnectButton>
-          )}
+            </MetamaskConnectButton> */}
+
         </div>
       </nav>
     </>

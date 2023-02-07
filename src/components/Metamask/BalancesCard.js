@@ -21,18 +21,24 @@ const BalanceCard = () => {
   }
 
   return (
-    <div className="balance-container">
-      <div className="balance-column1">
-        <p >Address: </p>
-        <p block>
-          ETH Balance:
-        </p>
+    <div className="mx-4 pl-8 px-3 py-1 bg-slate-800 text-white rounded-full flex flex-row items-center content-around space-x-6">
+      <div className="">
+        <p >{}</p>
+        <div className="flex flex-row items-center">
+        <span class="material-symbols-outlined">
+account_circle
+</span><p className="font-nunito ml-2 font-semibold text-sm">{addressShorten(account)}</p>
+</div>
+        <div className="flex flex-row items-center">
+        <span class="material-symbols-outlined">
+account_balance_wallet
+</span><div className=" flex flex-row items-baseline"><p className="font-nunito ml-2 font-semibold">{ethBalance}</p><p className="text-sm ml-1.5 font-nunito font-bold">ETH</p> </div>
+</div>
       </div>
-      <div className="balance-column2">
-        <p >{addressShorten(account)}</p>
-        <p >
-        <i className="fab fa-ethereum"></i>{" "}{ethBalance} 
-        </p>
+      <div className="rounded-full bg-white w-10 h-10 text-center text-slate-800">
+      <span className="material-symbols-outlined mt-2">
+logout
+</span>
       </div>
     </div>
   );

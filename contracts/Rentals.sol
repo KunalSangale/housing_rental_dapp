@@ -61,7 +61,7 @@ contract Rentals is Ownable {
     uint _bhk,
     uint _bathrooms,
     string memory _reraNumber
-    ) onlyOwner public  {
+    ) public  {
    
 
     units[unitCount] = Unit({

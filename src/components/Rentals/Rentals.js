@@ -27,7 +27,6 @@ const DetailsState = {
 const Rentals = () => {
   const [status, setStatus] = useState(DetailsState.READY);
   const [unit, setUnit] = useState({
-    unitNumber: "",
     unitAddress: "",
     rent: "",
     deposit: "",
@@ -89,7 +88,6 @@ async function storeFiles () {
       setStatus(DetailsState.WAITING);
       event.preventDefault();
       setUnit({
-        unitNumber: "",
         unitAddress: "",
         rent: "",
         deposit: "",
@@ -134,9 +132,18 @@ async function storeFiles () {
   return (
     <>
     <Navbar />
-    <div className="units">
-      <div className="addunit__container">
-        <h1>List Your Property</h1>
+    <div className="mt-10 m-auto w-fit border rounded-xl py-8 px-16  shadow-xl">
+      <h3 className="font-nunito text-2xl font-bold">LIST PROPERTY</h3>
+      <div className="flex flex-row items-start">
+        <div className="mt-8 ">
+          <div className="bg-slate-100 min-w-fit text-slate-600 font-bold font-nunito h-80 w-[36rem] text-center rounded border"> 
+          <span class="material-symbols-outlined text-5xl mt-32">
+add_a_photo
+</span>
+          </div>
+        </div>
+
+      <div className="">
         <div className="addunit__wrapper">
           {(status === LOADING ||
             status === WAITING) && (
@@ -154,17 +161,16 @@ async function storeFiles () {
             )}
           {status === READY && (
             <form className="custom-form" onSubmit={AddUnit}>
-              <label className="custom-input">
+              <label className="custom-input wide-input">
                 <input
                   type="p"
-                  value={unit.unitNumber.unitNumber}
-                  name="unitNumber"
+                  value={unit.unitAddress.unitAddress}
+                  name="unitAddress"
                   autoComplete="off"
                   onChange={handleInputChange}
                   required
                 />
-                
-                <span className="placeholder"> Unit Number </span>
+                <span className="placeholder"> Address </span>
               </label>
               <label className="custom-input">
                 <input
@@ -176,17 +182,6 @@ async function storeFiles () {
                   required
                 />
                 <span className="placeholder">RERA Number</span>
-              </label>
-              <label className="custom-input">
-                <input
-                  type="p"
-                  value={unit.unitAddress.unitAddress}
-                  name="unitAddress"
-                  autoComplete="off"
-                  onChange={handleInputChange}
-                  required
-                />
-                <span className="placeholder"> Address </span>
               </label>
               <label className="custom-input">
                 <input
@@ -290,8 +285,8 @@ async function storeFiles () {
       </ButtonGroup>
       
       </label> */}
-              <div className="button-container">
-                <button type="submit" className="custom-button">
+              <div className="">
+                <button type="submit" className=" font-nunito font-bold py-4 px-16 bg-blue-600 rounded-full text-white hover:bg-blue-800">
                   LIST PROPERTY
                 </button>
               </div>
@@ -337,8 +332,9 @@ async function storeFiles () {
           )}
         </div>
       </div>
+      </div>
 
-      <hr />
+      {/* <hr /> */}
     </div>
     </>
 
