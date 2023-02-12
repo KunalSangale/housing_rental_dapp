@@ -2,10 +2,7 @@ import "@/styles/globals.css"
 import { WagmiConfig, createClient } from "wagmi"
 import { getDefaultProvider } from "ethers"
 import { ThemeProvider } from "next-themes"
-const client = createClient({
-    autoConnect: true,
-    provider: getDefaultProvider(),
-})
+import { client } from "../wagmi"
 
 export default function App({ Component, pageProps }) {
     return (
