@@ -1,0 +1,29 @@
+{
+  "name": "housing_rental_dapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.15",
+    "@next/font": "13.1.6",
+    "@web3uikit/core": "^0.2.47",
+    "@web3uikit/icons": "^0.2.46",
+    "ethers": "^5",
+    "next": "13.1.6",
+    "next-themes": "^0.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "wagmi": "^0.11.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.6"
+  }
+}
