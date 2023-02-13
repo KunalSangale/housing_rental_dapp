@@ -1,13 +1,8 @@
 import Head from "next/head"
-import Image from "next/image"
-import { Inter } from "@next/font/google"
-import styles from "@/styles/Home.module.css"
 import Navbar from "@/components/Navbar/Navbar"
-import Hero from "@/components/HeroSection.js/Hero"
+import BrowseListings from "@/components/Listings/BrowseListings"
 
-const inter = Inter({ subsets: ["latin"] })
-
-export default function Home() {
+export default () => {
     return (
         <>
             <Head>
@@ -17,7 +12,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <Hero />
+            <BrowseListings />
         </>
     )
 }
