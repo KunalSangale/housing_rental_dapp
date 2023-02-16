@@ -1,16 +1,10 @@
 import { useAccount, useBalance, useDisconnect } from "wagmi"
 import { AlertCircle, User, Wallet, LogOut } from "@web3uikit/icons"
-
+import { addressShorten } from "@/utils"
 export default () => {
     const { address, isConnected } = useAccount()
     const { disconnect } = useDisconnect()
-    const addressShorten = (address) => {
-        return (
-            address.substring(0, 6) +
-            "..." +
-            address.substring(address.length - 5, address.length - 1)
-        )
-    }
+
     const { data, isError, isLoading } = useBalance({ address })
     if (!isConnected) {
         return (
