@@ -2,10 +2,12 @@ import { useState } from "react"
 import PulseLoader from "react-spinners/PulseLoader"
 import { VerifyCode } from "@web3uikit/core"
 import { useAccount, useSignMessage } from "wagmi"
+import { useCookies } from "react-cookie"
 import { useNotification } from "@web3uikit/core"
 export default (props) => {
     const [loading, setLoading] = useState(false)
     const { address, isConnected } = useAccount()
+    const [cookies, setCookie, removeCookie] = useCookies(["access-token"])
     const { signMessageAsync } = useSignMessage()
     const dispatch = useNotification()
     const handleSubmit = async (OTPCode) => {
@@ -30,24 +32,24 @@ export default (props) => {
         setLoading(false)
         if (data1.access_token) {
             dispatch({
-                type: "info",
-                message: "Your Aadhar login OTP is " + data1.access_token,
-                title: "Aadhar Login OTP",
+                type: "success",
+                message: "Aadhar connected successfully",
+                title: "Success",
                 position: "topR",
             })
-            props.handleStage(true)
+            setCookie("jwt", data1)
         } else {
             dispatch({
                 type: "error",
-                message: "Couldn't find the specified aadhar in the database",
-                title: "Invalid Aadhar ID",
+                message: "Invalid OTP or signature",
+                title: "Invalid OTP",
                 position: "topR",
             })
         }
     }
 
     return (
-        <div className="w-5/12 mx-auto border border-2 bg-white drop-shadow-md p-8 rounded-md flex flex-col items-center mt-24 space-y-4">
+        <div className="w-5/12 mx-auto border border-2 bg-white drop-shadow-md p-8 rounded-md flex flex-col items-center mt-32 space-y-4">
             <h3 className="font-bold text-3xl">Step 2: Enter OTP</h3>
             <p className="text-center font-light text-slate-600">
                 This step is required to confirm that you are the actual owner of your aadhar ID

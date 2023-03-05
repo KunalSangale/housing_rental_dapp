@@ -46,7 +46,7 @@ export default (props) => {
         props.setAadhar(formattedText)
     }
     return (
-        <div className="w-3/12 mx-auto border border-2 bg-white drop-shadow-md p-8 rounded-md flex flex-col items-center mt-24 space-y-4">
+        <div className="w-3/12 mx-auto border border-2 bg-white drop-shadow-md p-8 rounded-md flex flex-col items-center mt-32 space-y-4">
             <h3 className="font-bold text-3xl">Step 1: Login</h3>
             <p className="text-center font-light text-slate-600">
                 This step is required to confirm that you are the actual owner of your ethereum

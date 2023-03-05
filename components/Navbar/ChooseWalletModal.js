@@ -9,7 +9,9 @@ export default (props) => {
     const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
     const { connector, isConnected } = useAccount()
     const isDark = theme === "dark" || (theme === "system" && systemTheme === "dark")
-
+    if (isConnected) {
+        props.setModal(false)
+    }
     return (
         <Modal
             hasCancel={false}

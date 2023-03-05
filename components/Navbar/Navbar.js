@@ -4,9 +4,13 @@ import { Connect } from "./Connect"
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import Nossr from "../Nossr"
+import { useRouter } from 'next/router';
 import { useTheme } from "next-themes"
+const inactiveLink = " text-gray-700 md:hover:text-blue-700 md:dark:hover:text-white dark:text-gray-400"
+const activeLink = " md:text-blue-700 dark:text-white"
 export default () => {
     const { systemTheme, theme, setTheme } = useTheme()
+    const { pathname } = useRouter();
     const renderThemeChanger = () => {
         const currentTheme = theme === "system" ? systemTheme : theme
         if (currentTheme === "dark") {
@@ -27,6 +31,7 @@ export default () => {
             )
         }
     }
+    console.log(pathname)
     return (
         <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -76,7 +81,7 @@ export default () => {
                         <li>
                             <Link
                                 href="/"
-                                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname==="/" ? activeLink : inactiveLink))}
                                 aria-current="page"
                             >
                                 Home
@@ -85,25 +90,27 @@ export default () => {
                         <li>
                             <Link
                                 href="/browse"
-                                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/browse") ? activeLink : inactiveLink))}
                             >
                                 Browse
                             </Link>
                         </li>
                         <li>
                             <Link
-                                href="/"
-                                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                href="/list"
+                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/list") ? activeLink : inactiveLink))}
+                                
                             >
                                 List Property
                             </Link>
                         </li>
                         <li>
                             <Link
-                                href="/kyc"
-                                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                href="/account"
+                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/account") ? activeLink : inactiveLink))}
+
                             >
-                                KYC
+                                My Account
                             </Link>
                         </li>
                     </ul>

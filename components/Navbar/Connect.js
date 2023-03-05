@@ -10,7 +10,6 @@ export function Connect() {
     const { disconnect } = useDisconnect()
     const isDark = theme === "dark" || (theme === "system" && systemTheme === "dark")
     const [isModalOpen, setModal] = useState(false)
-    console.log(connectors)
     return (
         <div>
             <div>
