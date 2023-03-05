@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: [
         "./app/**/*.{js,ts,jsx,tsx}",
@@ -9,7 +10,11 @@ module.exports = {
     ],
     darkMode: "class",
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+              nunito: ['"Nunito Sans"', ...defaultTheme.fontFamily.sans]
+            }
+          },
     },
     plugins: [],
 }

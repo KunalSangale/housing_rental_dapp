@@ -1,12 +1,25 @@
 import Navbar from "@/components/Navbar/Navbar"
-export default ()=>{
+import MyProperties from "@/components/Listings/MyProperties"
+import { useState } from "react"
+import ListProperty from "@/components/Listings/ListProperty"
+import Nossr from "@/components/Nossr"
+export default () => {
+    const [stage, setStage] = useState(0)
+    const [activeProp, setActive] = useState(null)
     return (
         <>
-        <Navbar />
-        <div className="mt-32 w-full flex-col space-y-6 md:px-40">
-            <h4 className="text font-semibold text-slate-800 border-b w-full tracking-wide">PROPERTY LISTINGS</h4>
-            <h4 className="text font-semibold text-slate-800 border-b w-full tracking-wide">UNLISTED PROPERTIES</h4>
-        </div>
+            <Navbar />
+            <Nossr>
+                {stage === 0 && (
+                    <MyProperties
+                        changeActive={(e) => {
+                            setActive(e)
+                            setStage(1)
+                        }}
+                    />
+                )}
+                {stage === 1 && <ListProperty active={activeProp} />}
+            </Nossr>
         </>
     )
 }

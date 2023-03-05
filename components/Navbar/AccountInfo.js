@@ -20,15 +20,15 @@ export default () => {
                 <p>{}</p>
                 <div className="flex flex-row items-center">
                     <User fontSize="18px" />
-                    <p className="font-nunito ml-2  font-semibold text-xs">
+                    <p className=" ml-2  font-semibold text-xs">
                         {addressShorten(address)}
                     </p>
                 </div>
                 <div className="flex flex-row items-center">
                     <Wallet fontSize="18px" />
                     <div className=" flex flex-row items-baseline">
-                        <p className="font-nunito ml-2 font-semibold text-sm">{data?.formatted}</p>
-                        <p className=" ml-1.5 text-xs font-nunito font-bold">
+                        <p className=" ml-2 font-semibold text-sm">{data?.formatted}</p>
+                        <p className=" ml-1.5 text-xs  font-bold">
                             {data?.symbol}
                         </p>{" "}
                     </div>
