@@ -11,11 +11,14 @@ export default (props) => {
     const [cookies, setCookie, removeCookie] = useCookies(["access-token"])
     const [loading, setLoading] = useState(true)
     const [personalData, setPersonalData] = useState({ connected: false })
+    const [isSignedIn, setSignedIn] = useState(cookies["jwt"] && cookies["jwt"].access_token)
     const dispatch = useNotification()
 
-    const signWithEth = async() =>{
+    const signWithEth = async () => {
         setLoading(true)
-        const nonce = await fetch("http://localhost/api/get_nonce?public_address="+address).then(r=>r.json()).catch(e=>console.log)
+        const nonce = await fetch("http://localhost/api/get_nonce?public_address=" + address)
+            .then((r) => r.json())
+            .catch((e) => console.log)
         console.log(nonce)
         const signature = await signMessageAsync({
             message: "nonce:" + nonce,
@@ -29,11 +32,13 @@ export default (props) => {
                 public_address: address,
                 signed_nonce: signature,
             }),
-        }).then(r=>r.json()
-        ).catch(e=>console.log)
+        })
+            .then((r) => r.json())
+            .catch((e) => console.log)
         setLoading(false)
         console.log(result)
         if (result.access_token) {
+            setSignedIn(true)
             dispatch({
                 type: "success",
                 message: "Login Successful",
@@ -51,7 +56,8 @@ export default (props) => {
         }
     }
 
-    const logoutEth = async() =>{
+    const logoutEth = async () => {
+        setSignedIn(false)
         removeCookie("jwt")
     }
 
@@ -64,6 +70,11 @@ export default (props) => {
             body: JSON.stringify({ wallet_address: address }),
         })
             .then((r) => r.json())
+            .then((r) => {
+                if (r.found) {
+                    setPersonalData({ connected: false })
+                }
+            })
             .catch((e) => console.log)
         console.log(result)
     }
@@ -87,12 +98,12 @@ export default (props) => {
     //         </div>
     //     )
     // }
-    if (loading) {
+    if (isConnected && loading) {
         console.log("sss")
-        return(
-        <div className="mt-40">
-            <PuffLoader color="#36d7b7" />
-        </div>
+        return (
+            <div className="mt-40">
+                <PuffLoader color="#36d7b7" />
+            </div>
         )
     }
     return (
@@ -107,8 +118,14 @@ export default (props) => {
                             </p>
                             <p className=" ml-1.5 text-xs font-nunito font-bold">{data?.symbol}</p>
                             <button onClick={() => props.handleStage(true)}>Connect Aadhar</button>
-                            {(cookies["jwt"] && cookies["jwt"].access_token) ? <><p>Signed in with ETH</p> <button onClick={logoutEth}>Logout</button></>:<button onClick={signWithEth}>Sign in with eth</button>}
-
+                            {isSignedIn ? (
+                                <>
+                                    <p>Signed in with ETH</p>{" "}
+                                    <button onClick={logoutEth}>Logout</button>
+                                </>
+                            ) : (
+                                <button onClick={signWithEth}>Sign in with eth</button>
+                            )}
                         </div>
                     )}
                     {personalData.connected && (
@@ -122,7 +139,14 @@ export default (props) => {
                             </p>
                             <p className=" ml-1.5 text-xs font-nunito font-bold">{data?.symbol}</p>
                             <button onClick={disconnectAadhar}>Disconnect</button>
-                            {(cookies["jwt"] && cookies["jwt"].access_token) ? <><p>Signed in with ETH</p> <button onClick={logoutEth}>Logout</button></>:<button onClick={signWithEth}>Sign in with eth</button>}
+                            {isSignedIn ? (
+                                <>
+                                    <p>Signed in with ETH</p>{" "}
+                                    <button onClick={logoutEth}>Logout</button>
+                                </>
+                            ) : (
+                                <button onClick={signWithEth}>Sign in with eth</button>
+                            )}
                         </div>
                     )}
                 </>

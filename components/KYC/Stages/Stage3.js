@@ -37,6 +37,7 @@ export default (props) => {
                 title: "Success",
                 position: "topR",
             })
+            props.handleStage(true)
             setCookie("jwt", data1)
         } else {
             dispatch({

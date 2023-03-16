@@ -10,7 +10,11 @@ export default () => {
     const [stage, setStage] = useState(1)
     const [aadhar, setAadhar] = useState("")
     const handleStage = (direction) => {
-        direction ? setStage(stage + 1) : setStage(stage - 1)
+        if (stage === 3 && direction) {
+            setStage(1)
+        } else {
+            direction ? setStage(stage + 1) : setStage(stage - 1)
+        }
     }
     return (
         <>
