@@ -22,7 +22,7 @@ export default (props) => {
         if (data.otp) {
             dispatch({
                 type: "info",
-                message: "Your Aadhar login OTP is " + data.otp,
+                message: "Aadhar login OTP has been sent to your registered email address",
                 title: "Aadhar Login OTP",
                 position: "topR",
             })
