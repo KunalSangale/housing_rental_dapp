@@ -8,6 +8,7 @@ export default (props) => {
     const [listings, setListings] = useState([])
 
     const unlistProperty = (property_id) => {
+        // console.log(property_id)
         fetch("http://localhost/api/unlist", {
             method: "POST",
             headers: {
@@ -73,11 +74,11 @@ export default (props) => {
                             <p>{e.Address}</p>
                             <p>{e.Area}</p>
                             <p>{e.Pincode}</p>
-                            <p>{e.SaleDeedNumber}</p>
+                            <p>{e.property_id}</p>
                         </div>
                         <button
                             className="bg-blue-500 h-fit px-8 py-2 text-sm text-white font-nunito rounded-md font-bold"
-                            onClick={() => unlistProperty(e.SaleDeedNumber)}
+                            onClick={() => unlistProperty(e.property_id)}
                         >
                             UNLIST
                         </button>
