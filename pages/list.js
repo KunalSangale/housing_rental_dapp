@@ -18,7 +18,7 @@ export default () => {
                         }}
                     />
                 )}
-                {stage === 1 && <ListProperty active={activeProp} />}
+                {stage === 1 && <ListProperty active={activeProp} goBack={() => setStage(0)} />}
             </Nossr>
         </>
     )

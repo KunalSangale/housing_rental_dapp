@@ -19,6 +19,11 @@ export default (props) => {
             .then((r) => r.json())
             .then((data) => {
                 console.log(data)
+                if (data.found) {
+                    let newListings = [...listings]
+                    newListings = newListings.filter((obj) => obj.property_id !== property_id)
+                    setListings(newListings)
+                }
             })
             .catch((e) => console.log)
     }
