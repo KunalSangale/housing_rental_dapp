@@ -51,31 +51,30 @@ let timer = setTimeout(() => setShow(true), 1000);
         abi: housingConfig.abi,
         signerOrProvider: signer,
     })
-    const [files, setFile] = useState([]);
-    const [message, setMessage] = useState();
+    const [files, setFile] = useState([])
+    const [message, setMessage] = useState()
     const handleFile = (e) => {
-        setMessage("");
-        let file = e.target.files;
+        setMessage("")
+        let file = e.target.files
 
         for (let i = 0; i < file.length; i++) {
-            const fileType = file[i]['type'];
-            const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+            const fileType = file[i]["type"]
+            const validImageTypes = ["image/gif", "image/jpeg", "image/png"]
             if (validImageTypes.includes(fileType)) {
-                setFile([...files, file[i]]);
+                setFile([...files, file[i]])
             } else {
-                setMessage("only images accepted");
+                setMessage("only images accepted")
             }
-
         }
         //setFileList(e.target.files);
-    }; 
+    }
 
     const removeImage = (i) => {
-        setFile(files.filter(x => x.name !== i));
-     }
-   
+        setFile(files.filter((x) => x.name !== i))
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const data = new FormData(e.target)
         try{
         files.forEach((file, i) => {
@@ -154,6 +153,7 @@ let timer = setTimeout(() => setShow(true), 1000);
                                 .then((data) => {
                                     console.log("Stage 5: Done")
                                     console.log(data)
+                                    props.goBack()
                                 })
                                 .catch((e) => console.log)
                             unwatch()
@@ -334,33 +334,68 @@ let timer = setTimeout(() => setShow(true), 1000);
           <div class="flex flex-wrap -mx-3 mb-2">
                 {/* <div class="rounded-lg shadow-xl bg-gray-50 md:w-1/2 w-[360px]"> */}
                     <div class="m-4">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                      Upload Images
-                    </label>
+                        <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-zip"
+                        >
+                            Upload Images
+                        </label>
                         <div class="flex items-center justify-center w-full">
                             <label class="flex cursor-pointer flex-col w-full h-32 border-2 rounded-md border-dashed hover:bg-gray-100 hover:border-gray-300">
                                 <div class="flex flex-col items-center justify-center pt-7">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-12 h-12 text-gray-400 group-hover:text-gray-600"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
                                             d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                            clip-rule="evenodd" />
+                                            clip-rule="evenodd"
+                                        />
                                     </svg>
                                     <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                        Select a photo</p>
+                                        Select a photo
+                                    </p>
                                 </div>
-                                <input type="file" onChange={handleFile} class="opacity-0" multiple="multiple" name="files[]" />
+                                <input
+                                    type="file"
+                                    onChange={handleFile}
+                                    class="opacity-0"
+                                    multiple="multiple"
+                                    name="files[]"
+                                />
                             </label>
                         </div>
                         <div className="flex flex-wrap gap-2 mt-2">
                             {files.map((file, key) => {
                                 return (
                                     <div key={key} className=" relative">
-                                        <i onClick={() => { removeImage(file.name) }} className="h-2 w-2  absolute right-1 hover:text-white cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M12.854 2.854a.5.5 0 0 0-.708-.708L7.5 6.793L2.854 2.146a.5.5 0 1 0-.708.708L6.793 7.5l-4.647 4.646a.5.5 0 0 0 .708.708L7.5 8.207l4.646 4.647a.5.5 0 0 0 .708-.708L8.207 7.5l4.647-4.646Z" clip-rule="evenodd"/></svg>
+                                        <i
+                                            onClick={() => {
+                                                removeImage(file.name)
+                                            }}
+                                            className="h-2 w-2  absolute right-1 hover:text-white cursor-pointer"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="10"
+                                                height="10"
+                                                viewBox="0 0 15 15"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    fill-rule="evenodd"
+                                                    d="M12.854 2.854a.5.5 0 0 0-.708-.708L7.5 6.793L2.854 2.146a.5.5 0 1 0-.708.708L6.793 7.5l-4.647 4.646a.5.5 0 0 0 .708.708L7.5 8.207l4.646 4.647a.5.5 0 0 0 .708-.708L8.207 7.5l4.647-4.646Z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
                                         </i>
-                                        <img className="h-30 w-40 rounded-md" src={URL.createObjectURL(file)} />
+                                        <img
+                                            className="h-30 w-40 rounded-md"
+                                            src={URL.createObjectURL(file)}
+                                        />
                                     </div>
                                 )
                             })}
