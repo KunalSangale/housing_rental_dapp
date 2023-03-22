@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useContractRead, useNetwork, useProvider } from "wagmi"
 import { abi, contractAddress } from "../../constants"
 import Nossr from "../Nossr"
+import ListingItem from "./ListingItem"
 export default () => {
     // const { chain, chains } = useNetwork()
     // const provider = useProvider()
@@ -17,8 +18,8 @@ export default () => {
     // console.log(provider.getCode(contractAddress).then((r) => console.log(r)))
     // console.log(contractAddress)
     return (
-        <Nossr>
-            <div className="grid grid-cols-2 md:grid-cols-4 mt-36">Coming Soon</div>
-        </Nossr>
+        <div className="mt-32 w-full flex-col space-y-6 md:px-40">
+            <ListingItem/>
+        </div>
     )
 }

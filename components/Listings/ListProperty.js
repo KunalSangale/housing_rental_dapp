@@ -5,7 +5,40 @@ import { useAccount, useContract, useSigner } from "wagmi"
 import housingConfig from "../../../hardhat-rental/artifacts/contracts/HousingRental.sol/HousingRental.json"
 import contractAddress from "../../hardhat.json"
 import { watchContractEvent } from "@wagmi/core"
+
+
+
+const DefaultLocation = { lat: 10, lng: 106 };
+const DefaultZoom = 10;
 export default (props) => {
+  const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
+
+  const [location, setLocation] = useState(defaultLocation);
+  const [zoom, setZoom] = useState(DefaultZoom);
+
+  function handleChangeLocation (lat, lng){
+    const [show, setShow] = useState(false)
+
+useEffect(
+() => {
+let timer = setTimeout(() => setShow(true), 1000);
+
+  return () => {
+    clearTimeout(timer);
+  };
+}, [])
+    if(!show)return;
+    setLocation({lat:lat, lng:lng});
+  }
+  
+  function handleChangeZoom (newZoom){
+    setZoom(newZoom);
+  }
+
+  function handleResetLocation(){
+    setDefaultLocation({ ... DefaultLocation});
+    setZoom(DefaultZoom);
+  }
     // const [fileList, setFileList] = useState(null)
     // const handleFileChange = (e) => {
     //     setFileList(e.target.files)
@@ -52,6 +85,27 @@ export default (props) => {
           data.append("property_id", props.active.SaleDeedNumber)
           data.append("eth_rent", data.get("eth_rent").toString())
           data.append("deposit", data.get("eth_deposit").toString())
+          data.append("bhk",data.get("bhk"),toString())
+          data.append("bathrooms",data.get("bathrooms"))
+          data.append("furnish_status",data.get("furnish_status"))
+          const hasGym=data.get("hasGym")=="TRUE"?"TRUE":"FALSE"
+          const isPetFriendly=data.get("isPetFriendly")=="TRUE"?"TRUE":"FALSE"
+          const hasPark=data.get("hasPark")=="TRUE"?"TRUE":"FALSE"
+          const hasParking=data.get("hasParking")=="TRUE"?"TRUE":"FALSE"
+          const hasPool=data.get("hasPool")=="TRUE"?"TRUE":"FALSE"
+          const hasBalcony=data.get("hasBalcony")=="TRUE"?"TRUE":"FALSE"
+          const hasCameras=data.get("hasCameras")=="TRUE"?"TRUE":"FALSE"
+          const isSmartHome=data.get("isSmartHome")=="TRUE"?"TRUE":"FALSE"
+          data.append("hasGym",hasGym)
+          data.append("isPetFriendly",isPetFriendly)
+          data.append("hasPark",hasPark)
+          data.append("hasParking",hasParking)
+          data.append("hasPool",hasPool)
+          data.append("hasBalcony",hasBalcony)
+          data.append("hasCameras",hasCameras)
+          data.append("isSmartHome",isSmartHome)
+
+          
         }
         catch(e){
           console.log(e);
@@ -118,8 +172,10 @@ export default (props) => {
                 console.log(r)
             })
     }
+
     //const files = fileList ? [...fileList] : []
     return (
+      <div>
         <form class="flex flex-col w-full md:px-32 mt-32" onSubmit={handleSubmit}>
         <div class="flex flex-wrap -mx-3 mb-6 mt-100px">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -225,49 +281,49 @@ export default (props) => {
               <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                   <li class="w-full border-b border-gray-200  dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="vue-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="vue-checkbox-list" type="checkbox" name="hasParking" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="vue-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parking</label>
                       </div>
                   </li>
                   <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="react-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="react-checkbox-list" type="checkbox" name="hasGym" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="react-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gym</label>
                       </div>
                   </li>
                   <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="angular-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="angular-checkbox-list" type="checkbox" name="hasBalcony" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="angular-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcony</label>
                       </div>
                   </li>
                   <li class="w-full dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasPool" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Swimming Pool</label>
                       </div>
                   </li>
                   <li class="w-full dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasPark" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Playground/Park</label>
                       </div>
                   </li>
                   <li class="w-full dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="laravel-checkbox-list" type="checkbox" name="isPetFriendly" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pet Friendly</label>
                       </div>
                   </li>
                   <li class="w-full dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasCameras" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Surviellance Cameras</label>
                       </div>
                   </li>
                   <li class="w-full dark:border-gray-600">
                       <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <input id="laravel-checkbox-list" type="checkbox" name="isSmartHome" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Smart Home</label>
                       </div>
                   </li>
@@ -318,10 +374,12 @@ export default (props) => {
         Submit
       </button>
     </div>
+   
   </div>
-      </form> 
+      </form>  
+       </div>
        
     );
     
 }
-
+//AIzaSyAkBhTU6Tc8FNdu64ZRG4rPm2bin7H7OOI
