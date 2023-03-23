@@ -84,17 +84,17 @@ let timer = setTimeout(() => setShow(true), 1000);
           data.append("property_id", props.active.SaleDeedNumber)
           data.append("eth_rent", data.get("eth_rent").toString())
           data.append("deposit", data.get("eth_deposit").toString())
-          data.append("bhk",data.get("bhk"),toString())
+          data.append("bhk",data.get("bhk").toString())
           data.append("bathrooms",data.get("bathrooms"))
           data.append("furnish_status",data.get("furnish_status"))
-          const hasGym=data.get("hasGym")=="TRUE"?"TRUE":"FALSE"
-          const isPetFriendly=data.get("isPetFriendly")=="TRUE"?"TRUE":"FALSE"
-          const hasPark=data.get("hasPark")=="TRUE"?"TRUE":"FALSE"
-          const hasParking=data.get("hasParking")=="TRUE"?"TRUE":"FALSE"
-          const hasPool=data.get("hasPool")=="TRUE"?"TRUE":"FALSE"
-          const hasBalcony=data.get("hasBalcony")=="TRUE"?"TRUE":"FALSE"
-          const hasCameras=data.get("hasCameras")=="TRUE"?"TRUE":"FALSE"
-          const isSmartHome=data.get("isSmartHome")=="TRUE"?"TRUE":"FALSE"
+          const hasGym=data.get("hasGym")=="TRUE"?true:false
+          const isPetFriendly=data.get("isPetFriendly")=="TRUE"?true:false
+          const hasPark=data.get("hasPark")=="TRUE"?true:false
+          const hasParking=data.get("hasParking")=="TRUE"?true:false
+          const hasPool=data.get("hasPool")=="TRUE"?true:false
+          const hasBalcony=data.get("hasBalcony")=="TRUE"?true:false
+          const hasCameras=data.get("hasCameras")=="TRUE"?true:false
+          const isSmartHome=data.get("isSmartHome")=="TRUE"?true:false
           data.append("hasGym",hasGym)
           data.append("isPetFriendly",isPetFriendly)
           data.append("hasPark",hasPark)
@@ -264,9 +264,9 @@ let timer = setTimeout(() => setShow(true), 1000);
             </label>
             <div class="relative">
               <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="furnish_status">
-                <option>Fully Furnished</option>
-                <option>Semi Furnished</option>
-                <option>Not Furnished</option>
+                <option value={1}>Fully Furnished</option>
+                <option value={2}>Semi Furnished</option>
+                <option value={3}>Not Furnished</option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
