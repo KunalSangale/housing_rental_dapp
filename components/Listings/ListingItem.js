@@ -28,20 +28,20 @@ useEffect(() => {
             </h4>
             {listings.map((e, i) => {
                 return (
-                        <div class="pt-5 mt-10 max-w-sm rounded overflow-hidden shadow-lg" key={i}>
-                        <img class="w-full" src="" alt="Property Image"/>
-                        <div class="px-10 py-9">
-                            <p class="pb-2 text-gray-700">
-                            Rent:<span class="p-2 inline text-black-900 font-semibold">{e.eth_rent} ETH/mo</span>
+                        <div className="pt-5 mt-10 max-w-sm rounded overflow-hidden shadow-lg" key={i}>
+                        <img className="w-full" src="" alt="Property Image"/>
+                        <div className="px-10 py-9">
+                            <p className="pb-2 text-gray-700">
+                            Rent:<span className="p-2 inline text-black-900 font-semibold">{e.eth_rent} ETH/mo</span>
                             </p>
-                            <p class="pb-2 text-gray-700 text-base">
-                            Deposit:<span class="p-2 inline text-black-900 font-semibold">{e.deposit} ETH</span>
+                            <p className="pb-2 text-gray-700 text-base">
+                            Deposit:<span className="p-2 inline text-black-900 font-semibold">{e.deposit} ETH</span>
                             </p>
-                            <p class="pb-2 text-gray-700 text-base">
-                            Details:<span class="p-2 inline text-black-900 font-semibold">{e.details}</span>
+                            <p className="pb-2 text-gray-700 text-base">
+                            Details:<span className="p-2 inline text-black-900 font-semibold">{e.details}</span>
                             </p>
                         </div>
-                        <div class="px-6 pt-4 pb-8">
+                        <div className="px-6 pt-4 pb-8">
                         <div className="card-actions justify-end">
                         <Link  href={{
                             pathname: '/details',

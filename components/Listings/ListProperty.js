@@ -176,56 +176,56 @@ let timer = setTimeout(() => setShow(true), 1000);
     //const files = fileList ? [...fileList] : []
     return (
       <div>
-        <form class="flex flex-col w-full md:px-32 mt-32" onSubmit={handleSubmit}>
-        <div class="flex flex-wrap -mx-3 mb-6 mt-100px">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        <form className="flex flex-col w-full md:px-32 mt-32" onSubmit={handleSubmit}>
+        <div className="flex flex-wrap -mx-3 mb-6 mt-100px">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
               Property ID
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" type="text" name="propertyID" value={props.active.SaleDeedNumber} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" type="text" name="propertyID" value={props.active.SaleDeedNumber} readOnly/>
           </div>
-          <div class="w-full md:w-1/5 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          <div className="w-full md:w-1/5 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
               Area
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"  name="area" value={props.active.Area} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"  name="area" value={props.active.Area} readOnly/>
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
               Address
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"  name="address" value={props.active.Address} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"  name="address" value={props.active.Address} readOnly/>
           </div>
-          <div class="w-full md:w-1/5 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          <div className="w-full md:w-1/5 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
               Pincode
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"  name="pincode" value={props.active.Pincode} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"  name="pincode" value={props.active.Pincode} readOnly/>
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
               Rent
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_rent" type="number" min="0"step=".01"placeholder="Enter rent in ETH"/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_rent" type="number" min="0"step=".01"placeholder="Enter rent in ETH"/>
           </div>
-          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
               Deposit
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_deposit" type="number" min="0"step=".01"placeholder="Enter deposit in ETH"/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_deposit" type="number" min="0"step=".01"placeholder="Enter deposit in ETH"/>
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-2">
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        <div className="flex flex-wrap -mx-3 mb-2">
+        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
               Number of bedrooms
             </label>
-            <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bhk">
+            <div className="relative">
+              <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bhk">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -233,17 +233,17 @@ let timer = setTimeout(() => setShow(true), 1000);
                 <option>5</option>
                 <option>6</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
-          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
               Number of bathrooms
             </label>
-            <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bathrooms">
+            <div className="relative">
+              <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bathrooms">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -251,101 +251,101 @@ let timer = setTimeout(() => setShow(true), 1000);
                 <option>5</option>
                 <option>6</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+          <div className="flex flex-wrap -mx-3 mb-2">
+           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
               Furnishing Status
             </label>
-            <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="furnish_status">
+            <div className="relative">
+              <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="furnish_status">
                 <option value={1}>Fully Furnished</option>
                 <option value={2}>Semi Furnished</option>
                 <option value={3}>Not Furnished</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-full px-3 mt-3 mb-6 md:mb-0">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+          <div className="flex flex-wrap -mx-3 mb-2">
+            <div className="w-full md:w-full px-3 mt-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
                 Other Amenities (Check all that apply)
               </label>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                  <li class="w-full border-b border-gray-200  dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="vue-checkbox-list" type="checkbox" name="hasParking" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="vue-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parking</label>
+              <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  <li className="w-full border-b border-gray-200  dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="vue-checkbox-list" type="checkbox" name="hasParking" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="vue-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parking</label>
                       </div>
                   </li>
-                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="react-checkbox-list" type="checkbox" name="hasGym" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="react-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gym</label>
+                  <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="react-checkbox-list" type="checkbox" name="hasGym" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="react-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gym</label>
                       </div>
                   </li>
-                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="angular-checkbox-list" type="checkbox" name="hasBalcony" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="angular-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcony</label>
+                  <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="angular-checkbox-list" type="checkbox" name="hasBalcony" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="angular-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcony</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" name="hasPool" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Swimming Pool</label>
+                  <li className="w-full dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasPool" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="laravel-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Swimming Pool</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" name="hasPark" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Playground/Park</label>
+                  <li className="w-full dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasPark" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="laravel-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Playground/Park</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" name="isPetFriendly" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pet Friendly</label>
+                  <li className="w-full dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="laravel-checkbox-list" type="checkbox" name="isPetFriendly" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="laravel-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pet Friendly</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" name="hasCameras" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Surviellance Cameras</label>
+                  <li className="w-full dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="laravel-checkbox-list" type="checkbox" name="hasCameras" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="laravel-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Surviellance Cameras</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
-                          <input id="laravel-checkbox-list" type="checkbox" name="isSmartHome" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                          <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Smart Home</label>
+                  <li className="w-full dark:border-gray-600">
+                      <div className="flex items-center pl-6">
+                          <input id="laravel-checkbox-list" type="checkbox" name="isSmartHome" value="TRUE" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                          <label for="laravel-checkbox-list" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Smart Home</label>
                       </div>
                   </li>
               </ul>
               
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-                {/* <div class="rounded-lg shadow-xl bg-gray-50 md:w-1/2 w-[360px]"> */}
-                    <div class="m-4">
+          <div className="flex flex-wrap -mx-3 mb-2">
+                {/* <div className="rounded-lg shadow-xl bg-gray-50 md:w-1/2 w-[360px]"> */}
+                    <div className="m-4">
                         <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-zip"
                         >
                             Upload Images
                         </label>
-                        <div class="flex items-center justify-center w-full">
-                            <label class="flex cursor-pointer flex-col w-full h-32 border-2 rounded-md border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                <div class="flex flex-col items-center justify-center pt-7">
+                        <div className="flex items-center justify-center w-full">
+                            <label className="flex cursor-pointer flex-col w-full h-32 border-2 rounded-md border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                <div className="flex flex-col items-center justify-center pt-7">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="w-12 h-12 text-gray-400 group-hover:text-gray-600"
+                                        className="w-12 h-12 text-gray-400 group-hover:text-gray-600"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -355,14 +355,14 @@ let timer = setTimeout(() => setShow(true), 1000);
                                             clip-rule="evenodd"
                                         />
                                     </svg>
-                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                         Select a photo
                                     </p>
                                 </div>
                                 <input
                                     type="file"
                                     onChange={handleFile}
-                                    class="opacity-0"
+                                    className="opacity-0"
                                     multiple="multiple"
                                     name="files[]"
                                 />
@@ -403,9 +403,9 @@ let timer = setTimeout(() => setShow(true), 1000);
                     </div>
                 </div>
           </div>
-          <div class="md:flex md:items-center">
-    <div class="md:w-2/3">
-      <button class="bg-blue-500 h-fit px-8 py-2 text-sm text-white font-nunito rounded-md font-bold" type="submit">
+          <div className="md:flex md:items-center">
+    <div className="md:w-2/3">
+      <button className="bg-blue-500 h-fit px-8 py-2 text-sm text-white font-nunito rounded-md font-bold" type="submit">
         Submit
       </button>
     </div>
