@@ -185,13 +185,13 @@ let timer = setTimeout(() => setShow(true), 1000);
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-first-name">
               Property ID
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" type="text" name="propertyID" value={props.active.SaleDeedNumber} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" type="text" name="propertyID" value={props.active.SaleDeedNumber} readOnly/>
           </div>
           <div class=" md:w-1/3 px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-last-name">
               Area
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"  name="area" value={props.active.Area} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"  name="area" value={props.active.Area} readOnly/>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -199,13 +199,13 @@ let timer = setTimeout(() => setShow(true), 1000);
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-password">
               Address
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"  name="address" value={props.active.Address} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"  name="address" value={props.active.Address} readOnly/>
           </div>
           <div class="w-full md:w-1/3 px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-password">
               Pincode
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"  name="pincode" value={props.active.Pincode} readOnly/>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"  name="pincode" value={props.active.Pincode} readOnly/>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
@@ -236,8 +236,8 @@ let timer = setTimeout(() => setShow(true), 1000);
                 <option>5</option>
                 <option>6</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
@@ -254,8 +254,8 @@ let timer = setTimeout(() => setShow(true), 1000);
                 <option>5</option>
                 <option>6</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
@@ -265,14 +265,14 @@ let timer = setTimeout(() => setShow(true), 1000);
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-state">
               Furnishing Status
             </label>
-            <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="furnish_status">
+            <div className="relative">
+              <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="furnish_status">
                 <option value={1}>Fully Furnished</option>
                 <option value={2}>Semi Furnished</option>
                 <option value={3}>Not Furnished</option>
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
@@ -358,14 +358,14 @@ let timer = setTimeout(() => setShow(true), 1000);
                                             clip-rule="evenodd"
                                         />
                                     </svg>
-                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                         Select a photo
                                     </p>
                                 </div>
                                 <input
                                     type="file"
                                     onChange={handleFile}
-                                    class="opacity-0"
+                                    className="opacity-0"
                                     multiple="multiple"
                                     name="files[]"
                                     required
