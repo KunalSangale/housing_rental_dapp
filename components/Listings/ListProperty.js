@@ -175,31 +175,34 @@ let timer = setTimeout(() => setShow(true), 1000);
 
     //const files = fileList ? [...fileList] : []
     return (
-      <div>
-        <form class="flex flex-col w-full md:px-32 mt-32" onSubmit={handleSubmit}>
+      <div class="items-center justify-center ">
+        <form class="flex flex-col w-full justify-center md:px-32 mt-28" onSubmit={handleSubmit}>
+        <h4 className="text-4xl font-bold text-slate-800 mb-8 border-b w-full tracking-wide dark:text-white">
+                List your property
+            </h4>
         <div class="flex flex-wrap -mx-3 mb-6 mt-100px">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          <div class=" md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-first-name">
               Property ID
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" type="text" name="propertyID" value={props.active.SaleDeedNumber} readOnly/>
           </div>
-          <div class="w-full md:w-1/5 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          <div class=" md:w-1/3 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-last-name">
               Area
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"  name="area" value={props.active.Area} readOnly/>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          <div class="w-full md:w-1/3 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-password">
               Address
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"  name="address" value={props.active.Address} readOnly/>
           </div>
-          <div class="w-full md:w-1/5 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          <div class="w-full md:w-1/3 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-password">
               Pincode
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"  name="pincode" value={props.active.Pincode} readOnly/>
@@ -207,25 +210,25 @@ let timer = setTimeout(() => setShow(true), 1000);
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-city">
               Rent
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_rent" type="number" min="0"step=".01"placeholder="Enter rent in ETH"/>
+            <input class="appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_rent" type="number" min="0"step=".01"placeholder="Enter rent in ETH" required/>
           </div>
           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-city">
               Deposit
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_deposit" type="number" min="0"step=".01"placeholder="Enter deposit in ETH"/>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="eth_deposit" type="number" min="0"step=".01"placeholder="Enter deposit in ETH" required/>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-state">
               Number of bedrooms
             </label>
             <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bhk">
+              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bhk" required>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -239,11 +242,11 @@ let timer = setTimeout(() => setShow(true), 1000);
             </div>
           </div>
           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-zip">
               Number of bathrooms
             </label>
             <div class="relative">
-              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bathrooms">
+              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="bathrooms" required>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -259,7 +262,7 @@ let timer = setTimeout(() => setShow(true), 1000);
           </div>
           <div class="flex flex-wrap -mx-3 mb-2">
            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-state">
               Furnishing Status
             </label>
             <div class="relative">
@@ -273,56 +276,56 @@ let timer = setTimeout(() => setShow(true), 1000);
               </div>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-full px-3 mt-3 mb-6 md:mb-0">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+          <div class="flex flex-wrap w-full -mx-3 mb-2">
+            <div class="w-full md:w-2/3 pl-5 mt-3 mb-6 md:mb-0">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" for="grid-zip">
                 Other Amenities (Check all that apply)
               </label>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                  <li class="w-full border-b border-gray-200  dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+              <ul class="items-center w-full md:w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="vue-checkbox-list" type="checkbox" name="hasParking" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="vue-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parking</label>
                       </div>
                   </li>
                   <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                      <div class="flex items-center px-2">
                           <input id="react-checkbox-list" type="checkbox" name="hasGym" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="react-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gym</label>
                       </div>
                   </li>
                   <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                      <div class="flex items-center px-2">
                           <input id="angular-checkbox-list" type="checkbox" name="hasBalcony" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="angular-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcony</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="laravel-checkbox-list" type="checkbox" name="hasPool" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Swimming Pool</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="laravel-checkbox-list" type="checkbox" name="hasPark" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Playground/Park</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="laravel-checkbox-list" type="checkbox" name="isPetFriendly" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pet Friendly</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="laravel-checkbox-list" type="checkbox" name="hasCameras" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Surviellance Cameras</label>
                       </div>
                   </li>
-                  <li class="w-full dark:border-gray-600">
-                      <div class="flex items-center pl-6">
+                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                      <div class="flex items-center px-2">
                           <input id="laravel-checkbox-list" type="checkbox" name="isSmartHome" value="TRUE" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                           <label for="laravel-checkbox-list" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Smart Home</label>
                       </div>
@@ -331,21 +334,21 @@ let timer = setTimeout(() => setShow(true), 1000);
               
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="flex flex-wrap w-full -mx-3 mb-2">
                 {/* <div class="rounded-lg shadow-xl bg-gray-50 md:w-1/2 w-[360px]"> */}
-                    <div class="m-4">
+                    <div class="m-4 w-full md:w-2/3 ">
                         <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white"
                             for="grid-zip"
                         >
                             Upload Images
                         </label>
                         <div class="flex items-center justify-center w-full">
-                            <label class="flex cursor-pointer flex-col w-full h-32 border-2 rounded-md border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                <div class="flex flex-col items-center justify-center pt-7">
+                            <label class="flex cursor-pointer flex-col w-full h-42 border-2 rounded-md border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                <div class="flex flex-col items-center justify-center h-42 p-7">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="w-12 h-12 text-gray-400 group-hover:text-gray-600"
+                                        class="w-12 h-22 text-gray-400 group-hover:text-gray-600"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -365,6 +368,7 @@ let timer = setTimeout(() => setShow(true), 1000);
                                     class="opacity-0"
                                     multiple="multiple"
                                     name="files[]"
+                                    required
                                 />
                             </label>
                         </div>
@@ -403,15 +407,15 @@ let timer = setTimeout(() => setShow(true), 1000);
                     </div>
                 </div>
           </div>
-          <div class="md:flex md:items-center">
-    <div class="md:w-2/3">
-      <button class="bg-blue-500 h-fit px-8 py-2 text-sm text-white font-nunito rounded-md font-bold" type="submit">
-        Submit
-      </button>
-    </div>
-   
-  </div>
-      </form>  
+          <div class="md:flex  ">
+          <div class="md:w-2/3  md:self-center">
+            <button class="bg-blue-500 ml-[340px] mb-5  self-center px-[45px] py-[9px] text-md text-white font-nunito rounded-md font-bold" type="submit">
+              Submit
+            </button>
+          </div>
+        
+        </div>
+        </form>  
        </div>
        
     );
