@@ -2,6 +2,8 @@ import "@/styles/globals.css"
 import { WagmiConfig, createClient } from "wagmi"
 import { getDefaultProvider } from "ethers"
 import { ThemeProvider } from "next-themes"
+import { darkTheme } from "@/theme/themes"
+import { CssBaseline } from "@mui/joy"
 import { client } from "../wagmi"
 import { NotificationProvider } from "@web3uikit/core"
 import { Inter } from "@next/font/google"
@@ -16,6 +18,7 @@ export default function App({ Component, pageProps }) {
                 <CookiesProvider>
                     <NotificationProvider>
                         <main className={inter.className}>
+                            <CssBaseline />
                             <Component {...pageProps} />
                         </main>
                     </NotificationProvider>

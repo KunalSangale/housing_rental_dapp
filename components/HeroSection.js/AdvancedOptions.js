@@ -32,9 +32,9 @@ var config = [
         prop: "isPetFriendly",
     },
 ]
-var defaultBg = "bg-slate-200 "
-var activeBg = "bg-emerald-200 "
-var disabledBg = "bg-red-200 "
+var defaultBg = "bg-slate-100 border border-slate-300 "
+var activeBg = "bg-emerald-200 border border-emerald-300 "
+var disabledBg = "bg-red-200 border border-red-300 "
 
 var defaultTxt = "text-slate-600 "
 var activeTxt = "text-emerald-600 "

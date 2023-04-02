@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@heroicons/react": "^2.0.15",
+    "@mui/joy": "^5.0.0-alpha.73",
     "@next/font": "13.1.6",
     "@web3uikit/core": "^0.2.47",
     "@web3uikit/icons": "^0.2.46",
