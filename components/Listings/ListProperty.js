@@ -78,7 +78,7 @@ let timer = setTimeout(() => setShow(true), 1000);
         const data = new FormData(e.target)
         try{
         files.forEach((file, i) => {
-            data.append(`uploaded_files`, file, "x1")
+            data.append(`uploaded_files`, file, file.name)
         })
         
           data.append("property_id", props.active.SaleDeedNumber)

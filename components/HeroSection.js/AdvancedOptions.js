@@ -32,23 +32,23 @@ var config = [
         prop: "isPetFriendly",
     },
 ]
-var defaultBg = "bg-slate-100 border border-slate-300 "
-var activeBg = "bg-emerald-200 border border-emerald-300 "
-var disabledBg = "bg-red-200 border border-red-300 "
+var defaultBg = "bg-slate-100  "
+var activeBg = "bg-emerald-100  "
+var disabledBg = "bg-red-100  "
 
-var defaultTxt = "text-slate-600 "
-var activeTxt = "text-emerald-600 "
-var disabledTxt = "text-red-600 "
+var defaultTxt = "text-slate-500 "
+var activeTxt = "text-emerald-800 "
+var disabledTxt = "text-red-500 "
 export default (props) => {
     const handleClick = (i) => {
         if (props.active.hasOwnProperty(config[i].prop)) {
-            if (props.active[config[i].prop]) {
-                props.setActive({ ...props.active, [config[i].prop]: false })
-            } else {
-                var newObj = { ...props.active }
-                delete newObj[config[i].prop]
-                props.setActive(newObj)
-            }
+            // if (props.active[config[i].prop]) {
+            //     props.setActive({ ...props.active, [config[i].prop]: false })
+            // } else {
+            var newObj = { ...props.active }
+            delete newObj[config[i].prop]
+            props.setActive(newObj)
+            // }
         } else {
             props.setActive({ ...props.active, [config[i].prop]: true })
         }
@@ -66,19 +66,25 @@ export default (props) => {
         }
     }
     return (
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 justify-items-center gap-y-4">
+        <div
+            className={
+                "mt-4 grid grid-cols-2 justify-items-stretch gap-x-4 gap-y-4 " +
+                (props.wide ? "md:grid-cols-4" : "")
+            }
+        >
             {config.map((e, i) => {
                 return (
                     <div
                         className={
-                            "flex justify-center items-center rounded  h-20 w-36 cursor-pointer " +
+                            "flex justify-center items-center rounded-lg  h-20 cursor-pointer " +
                             getString(e.prop, false)
                         }
                         onClick={() => handleClick(i)}
                     >
                         <p
                             className={
-                                "text-lg select-none text-center " + getString(e.prop, true)
+                                "font-bold text-lg select-none text-center " +
+                                getString(e.prop, true)
                             }
                         >
                             {e.label}
