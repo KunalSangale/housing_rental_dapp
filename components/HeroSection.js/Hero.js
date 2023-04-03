@@ -1,13 +1,10 @@
-import { InputNew as Input } from "@web3uikit/core"
-import { Search } from "@web3uikit/icons"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
-import AsyncSelect from "react-select/async"
-import { components } from "react-select"
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+
 import axios from "../../axiosConfig"
 import Link from "next/link"
 import AdvancedOptions from "./AdvancedOptions"
+import CitySearch from "./CitySearch"
 // import { url } from "inspector"
 export default () => {
     const { theme, systemTheme } = useTheme()
@@ -24,38 +21,7 @@ export default () => {
 
     //   return () => clearTimeout(delayDebounceFn)
     // }, [searchTerm])
-    const handleSearchChange = (e) => {
-        if (e == null) {
-            var newQ = { ...queryParams }
-            delete newQ.City
-            setQuery(newQ)
-        }
-        setQuery({ ...queryParams, City: e.name })
-    }
 
-    const Control = ({ children, ...props }) => {
-        return (
-            <components.Control {...props}>
-                <MagnifyingGlassIcon className="w-6 h-6 mx-2 my-2" />
-                {children}
-            </components.Control>
-        )
-    }
-
-    const getOptions = (inputValue) => {
-        console.log("called")
-        return axios
-            .post("/get_autocomplete", {
-                searchQuery: inputValue,
-            })
-            .then((response) => {
-                // console.log(response.data)
-                if (response.data.length == 0 || response.data == null) {
-                    response.data = [{ name: inputValue }]
-                }
-                return response.data
-            })
-    }
     return (
         <div className="items-center h-screen flex flex-col bg-cover">
             <div
@@ -105,18 +71,7 @@ export default () => {
 
             {/* <div className=" min-h-screen bg-gray-100 flex justify-center items-center"> */}
             <div className="w-full max-w-2xl mt-4 ">
-                <AsyncSelect
-                    cacheOptions
-                    loadOptions={getOptions}
-                    components={{ Control }}
-                    getOptionLabel={(option) =>
-                        option.name + (option.state ? ", " + option.state : "")
-                    }
-                    isClearable
-                    onChange={handleSearchChange}
-                    noOptionsMessage={() => "Search cities"}
-                    placeholder="Search Cities..."
-                />
+                <CitySearch queryParams={queryParams} setQuery={setQuery} />
                 <div className="sm:flex items-center bg-white mt-4 rounded-lg overflow-hidden px-2 py-1 justify-between">
                     {/* <input className="text-base text-gray-600 flex-grow outline-none px-2 " type="text" placeholder="Find Properties" /> */}
 
@@ -154,7 +109,7 @@ export default () => {
                         </Link>
                     </div>
                 </div>
-                <AdvancedOptions setActive={setActive} active={active} />
+                <AdvancedOptions setActive={setActive} active={active} wide={true} />
             </div>
             {/* </div> */}
         </div>
