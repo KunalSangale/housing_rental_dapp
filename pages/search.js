@@ -2,6 +2,7 @@ import axios from "../axiosConfig"
 import { useEffect, useState } from "react"
 import useQuery from "@/hooks/useQuery"
 import { PulseLoader } from "react-spinners"
+import Link from "next/link"
 import Navbar from "@/components/Navbar/Navbar"
 export default () => {
     const query = useQuery()
@@ -35,12 +36,18 @@ export default () => {
                     {searchResults.map((e, i) => {
                         return (
                             <div className="w-60 h-60 bg-slate-100 border rounded p-3 ">
+                                 <Link
+                                    href={{
+                                        pathname: "/listing/" + e.Listing.metadata_id,
+                                    }}
+                                >
                                 <p className="text-slate-600 font-bold text-sm">
                                     {e.Property.Address}
                                 </p>
                                 <p className="text-slate-600 text-sm">{e.Listing.bhk} BHK</p>
                                 <p className="text-slate-600 text-sm">{e.Listing.deposit} ETH</p>
                                 <p className="text-blue-600 text-sm">{e.Listing.eth_rent} ETH</p>
+                                </Link>
                             </div>
                         )
                     })}

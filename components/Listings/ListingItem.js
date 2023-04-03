@@ -21,13 +21,10 @@ const ListingItem = () => {
     }, [])
 
     return (
-        <div>
-            <h4 className="text font-semibold text-slate-800 border-b w-full tracking-wide ">
-                PROPERTY LISTINGS
-            </h4>
+        <div className="flex flex-row w-full">
             {listings.map((e, i) => {
                 return (
-                    <div className="pt-5 mt-10 max-w-sm rounded overflow-hidden shadow-lg" key={i}>
+                    <div className="basis-1/2 pt-5 mt-10 max-w-sm rounded overflow-hidden shadow-lg" key={i}>
                         <img className="w-full" src="" alt="Property Image" />
                         <div className="px-10 py-9">
                             <p className="pb-2 text-gray-700">
@@ -43,9 +40,9 @@ const ListingItem = () => {
                                 </span>
                             </p>
                             <p className="pb-2 text-gray-700 text-base">
-                                Details:
+                                Address:
                                 <span className="p-2 inline text-black-900 font-semibold">
-                                    {e.details}
+                                    {e.address}
                                 </span>
                             </p>
                         </div>

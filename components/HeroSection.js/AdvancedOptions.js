@@ -24,7 +24,7 @@ var config = [
         prop: "isSmartHome",
     },
     {
-        label: "Gymmnassium",
+        label: "Gymnasium",
         prop: "hasGymn",
     },
     {

@@ -12,21 +12,17 @@ import Navbar from "@/components/Navbar/Navbar"
 const Details=({item})=>{
     const router=useRouter();
     const data=router.query;
-    var furnish_status="";
-    switch(data.furnish_status){
-        case "1":
-            furnish_status="Fully Furnished"
-            break;
-        case "2":
-            furnish_status="Semi Furnished"
-            break;
-        case "3":
-            furnish_status="Not Furnished"
-            break;
-        default:
-            break;
-            
+    const [furnish_status,set_furnish_status]=useState([]);
+    if(data.furnish_status==1){
+      set_furnish_status("Fully Furnished");
     }
+    else if(data.furnish_status==2){
+      set_furnish_status("Semi Furnished");
+    }
+    else{
+      set_furnish_status("Not Furnished");
+    }
+    console.log("sijfea",furnish_status);
     const slides = [
         {
           url: '/apt2.jpeg',

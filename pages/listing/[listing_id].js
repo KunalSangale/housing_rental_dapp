@@ -10,10 +10,9 @@ import Head from "next/head"
 import Navbar from "@/components/Navbar/Navbar"
 import axios from "@/axiosConfig"
 import { PulseLoader } from "react-spinners"
-var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
+var furnish_config = ["Fully Furnished", "Semi-Furnished", "Not Furnished"]
 const Details = ({ item }) => {
     const router = useRouter()
-    var furnish_status = ""
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const { listing_id } = router.query
@@ -43,19 +42,6 @@ const Details = ({ item }) => {
                 <p className="text-center text-slate-600 ">Listing does not exist</p>
             </div>
         )
-    }
-    switch (data.furnish_status) {
-        case "1":
-            furnish_status = "Fully Furnished"
-            break
-        case "2":
-            furnish_status = "Semi Furnished"
-            break
-        case "3":
-            furnish_status = "Not Furnished"
-            break
-        default:
-            break
     }
     const slides = [
         {
@@ -166,7 +152,7 @@ const Details = ({ item }) => {
                                     description={"Property ID"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={furnish_config[data.furnish_status]}
+                                    title={furnish_config[data.furnish_status-1]}
                                     description={"Furnishing Status"}
                                 ></FeatureCard>
                                 <FeatureCard
