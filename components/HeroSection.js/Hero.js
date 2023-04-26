@@ -1,6 +1,5 @@
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
-
 import axios from "../../axiosConfig"
 import Link from "next/link"
 import AdvancedOptions from "./AdvancedOptions"
@@ -12,6 +11,16 @@ export default () => {
     // const [sutocompleteList, setAutoComplete] = useState(null)
     const [queryParams, setQuery] = useState({})
     const [active, setActive] = useState({})
+    const getInitialState = () => {
+        const value = "2.0";
+        return value;
+      }
+    const [rent_max,setRentMax]=useState(getInitialState)
+    const handleChange = (e) => {
+        setRentMax(e.target.value);
+        setQuery({rent_max:e.target.value});
+        console.log(e.target.value);
+      };
     //   useEffect(() => {
     //   const delayDebounceFn = setTimeout(() => {
     //     console.log(searchTerm)
@@ -79,8 +88,9 @@ export default () => {
                         <select
                             id="Budget"
                             className="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg"
+                            value={rent_max} onChange={handleChange}
                         >
-                            <option value="" selected>
+                            <option value="" >
                                 Budget
                             </option>
                             <option value="0.2"> &lt; 0.2 ETH</option>

@@ -148,10 +148,12 @@ let timer = setTimeout(() => setShow(true), 1000);
                                     property_id: props.active.SaleDeedNumber,
                                     index: parseInt(id.toString()),
                                 }),
+                               
                             })
                                 .then((r) => r.json())
                                 .then((data) => {
                                     console.log("Stage 5: Done")
+                                    console.log("id",id.toString()),
                                     console.log(data)
                                     props.goBack()
                                 })
