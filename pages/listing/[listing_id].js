@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import FeatureCard from "@/components/Listings/FeatureCard.js"
 import { useState } from "react"
 import { ImCross } from "react-icons/im"
+import Link from "next/link"
 import { AiFillCheckCircle } from "react-icons/ai"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
 import { RxDotFilled } from "react-icons/rx"
@@ -9,14 +10,25 @@ import { useRouter } from "next/router"
 import Head from "next/head"
 import Navbar from "@/components/Navbar/Navbar"
 import axios from "@/axiosConfig"
+import { useAccount, useContract, useSigner } from "wagmi"
+import housingConfig from "../../../hardhat-rental/artifacts/contracts/HousingRental.sol/HousingRental.json"
+import contractAddress from "../../hardhat.json"
+import { watchContractEvent } from "@wagmi/core"
 import { PulseLoader } from "react-spinners"
 import FixedLocation from "@/components/MapPicker/FixedLocation"
 var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
 const Details = ({ item }) => {
+    const { address, isConnected } = useAccount()
+    const { data: signer, isError } = useSigner()
+    const [index,setIndex]=useState(null)
+    const contract = useContract({
+        address: contractAddress.deployed_at,
+        abi: housingConfig.abi,
+        signerOrProvider: signer,
+    })
     const router = useRouter()
-    var furnish_status = ""
     const [currentIndex, setCurrentIndex] = useState(0)
-
+    // var index
     const { listing_id } = router.query
     const [listing, setListing] = useState(null)
     const [isLoading, setLoading] = useState(true)
@@ -30,6 +42,21 @@ const Details = ({ item }) => {
     }, [listing_id])
     console.log(listing)
     var data = listing && listing !== undefined && listing.Listings
+    // console.log("m",listing.Listings.listing_index)
+    console.log("index",index)
+    const createProposal=async (e)=>{
+        e.preventDefault()
+        const transactionRes = await contract.createProposal(listing.Listings.listing_index)
+       
+        return transactionRes.wait(1)
+        
+    }
+    const getProposals=async (e)=>{
+        e.preventDefault()
+        const transactionRes=await contract.getProposals(listing.Listings.listing_index)
+        console.log(transactionRes)
+        return transactionRes
+    }
     var propData = listing && listing !== undefined && listing.PropertyOwnership
     if (isLoading) {
         return (
@@ -44,19 +71,6 @@ const Details = ({ item }) => {
                 <p className="text-center text-slate-600 ">Listing does not exist</p>
             </div>
         )
-    }
-    switch (data.furnish_status) {
-        case "1":
-            furnish_status = "Fully Furnished"
-            break
-        case "2":
-            furnish_status = "Semi Furnished"
-            break
-        case "3":
-            furnish_status = "Not Furnished"
-            break
-        default:
-            break
     }
     const slides = [
         {
@@ -167,7 +181,7 @@ const Details = ({ item }) => {
                                     description={"Property ID"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={furnish_config[data.furnish_status]}
+                                    title={furnish_config[data.furnish_status-1]}
                                     description={"Furnishing Status"}
                                 ></FeatureCard>
                                 <FeatureCard
@@ -259,7 +273,12 @@ const Details = ({ item }) => {
                         <FixedLocation lat={data.latitude} lng={data.longitude} />
                     </div>
                 </div>
+                <button className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => createProposal(event)}>
+                 Create Proposal
+                </button>
             </div>
+            
         </>
     )
 }

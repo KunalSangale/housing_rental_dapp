@@ -133,7 +133,7 @@ export default (props) => {
                                 .then((r) => r.json())
                                 .then((data) => {
                                     console.log("Stage 5: Done")
-                                    console.log(data)
+                                    console.log("id", id.toString()), console.log(data)
                                     props.goBack()
                                 })
                                 .catch((e) => console.log)
@@ -286,7 +286,7 @@ export default (props) => {
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
-                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white"
                             for="grid-zip"
                         >
                             Number of bathrooms

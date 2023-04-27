@@ -18,8 +18,13 @@ export default () => {
     // console.log(provider.getCode(contractAddress).then((r) => console.log(r)))
     // console.log(contractAddress)
     return (
-        <div className="mt-32 w-full flex-col space-y-6 md:px-40">
+        <div className="mt-32 w-full  space-y-6 md:px-40">
+            <h4 className="text font-semibold text-slate-800 border-b w-full tracking-wide ">
+                PROPERTY LISTINGS
+            </h4>
+            <div className="flex flex-row">
             <ListingItem/>
+            </div>
         </div>
     )
 }
