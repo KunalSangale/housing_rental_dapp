@@ -10,6 +10,7 @@ import Head from "next/head"
 import Navbar from "@/components/Navbar/Navbar"
 import axios from "@/axiosConfig"
 import { PulseLoader } from "react-spinners"
+import FixedLocation from "@/components/MapPicker/FixedLocation"
 var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
 const Details = ({ item }) => {
     const router = useRouter()
@@ -101,7 +102,7 @@ const Details = ({ item }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <div className="home-container">
+            <div className="home-container w-full">
                 <div className="home-container2">
                     <div className="max-w-[1400px] h-[500px] w-full m-auto  relative group">
                         <div
@@ -245,11 +246,17 @@ const Details = ({ item }) => {
                 <FeatureCard title={"Water Supply"} description={"Corporation"}></FeatureCard>
                 <FeatureCard title={"Gated Security"} description={"Yes"}></FeatureCard>
                 <FeatureCard title={"Floor"} description={"6"}></FeatureCard>
-                <FeatureCard title={"Furnishing Status"} description={data.furnish_status}></FeatureCard> */}
+            <FeatureCard title={"Furnishing Status"} description={data.furnish_status}></FeatureCard> */}
                         {/* // <div className="feature-card">Unit Number:{parseInt(data.unitNumber._hex,16)}</div>
                 // <div className="feature-card">Unit Address:{(data.unitAddress)}</div>
                 // <div className="feature-card">Rent:{formatEther(BigNumber.from(parseInt(data.rent._hex,16).toString()))} ETH per month</div>
-                // <div className="feature-card">Deposit:{formatEther(BigNumber.from(parseInt(data.deposit._hex,16).toString()))} ETH</div> */}
+            // <div className="feature-card">Deposit:{formatEther(BigNumber.from(parseInt(data.deposit._hex,16).toString()))} ETH</div> */}
+                    </div>
+                </div>
+                <div className="flex flex-col h-[32rem] w-full p-3">
+                    <h1 className="home-text">Map Location</h1>
+                    <div className="w-full h-full px-4 mb-10">
+                        <FixedLocation lat={data.latitude} lng={data.longitude} />
                     </div>
                 </div>
             </div>

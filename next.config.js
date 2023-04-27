@@ -9,6 +9,9 @@ const nextConfig = {
             },
         ],
     },
+    env: {
+        MapboxAccessToken: process.env.MapboxAccessToken,
+    },
 }
 
 module.exports = nextConfig
