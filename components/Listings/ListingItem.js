@@ -22,7 +22,7 @@ const ListingItem = () => {
     }, [])
 
     return (
-        <div className="flex flex-row w-full">
+        <div className="flex flex-row w-full justify-stretch">
             {listings.map((e, i) => {
                 return (
                     <div className="pt-5 mt-10 max-w-sm rounded overflow-hidden shadow-lg" key={i}>
@@ -51,9 +51,9 @@ const ListingItem = () => {
                                 </span>
                             </p>
                             <p className=" text-gray-700 text-base">
-                                Details:
+                                Apartment Type:
                                 <span className="p-2 inline text-black-900 font-semibold">
-                                    {e.address}
+                                    {e.bhk} BHK
                                 </span>
                             </p>
                         </div>

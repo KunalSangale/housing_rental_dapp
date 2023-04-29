@@ -16,11 +16,11 @@ import contractAddress from "../../hardhat.json"
 import { watchContractEvent } from "@wagmi/core"
 import { PulseLoader } from "react-spinners"
 import FixedLocation from "@/components/MapPicker/FixedLocation"
+import Image from "next/image"
 var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
 const Details = ({ item }) => {
     const { address, isConnected } = useAccount()
     const { data: signer, isError } = useSigner()
-    const [index,setIndex]=useState(null)
     const contract = useContract({
         address: contractAddress.deployed_at,
         abi: housingConfig.abi,
@@ -32,28 +32,39 @@ const Details = ({ item }) => {
     const { listing_id } = router.query
     const [listing, setListing] = useState(null)
     const [isLoading, setLoading] = useState(true)
+    const [count, setCount] = useState(0)
+    const [slides, setSlides] = useState([])
+    // var slides = []
     useEffect(() => {
         if (listing_id == null) return
         if (!isLoading) setLoading(true)
-        axios.get("/listing?metadata=" + listing_id).then((response) => {
-            setListing(response.data)
+        Promise.all([
+            axios.get("/listing?metadata=" + listing_id),
+            axios.get("/totalimages/" + listing_id),
+        ]).then((responses) => {
+            setListing(responses[0].data)
+            setCount(responses[1].data)
+            let newSlides = []
+            for (let i = 0; i < responses[1].data; i++) {
+                newSlides.push({
+                    url: "http://localhost/api/images/" + listing_id + "?id=" + (i + 1),
+                })
+            }
+            setSlides(newSlides)
             setLoading(false)
         })
     }, [listing_id])
     console.log(listing)
     var data = listing && listing !== undefined && listing.Listings
-    // console.log("m",listing.Listings.listing_index)
-    console.log("index",index)
-    const createProposal=async (e)=>{
+    const createProposal = async (e) => {
         e.preventDefault()
         const transactionRes = await contract.createProposal(listing.Listings.listing_index)
-       
+
         return transactionRes.wait(1)
-        
     }
-    const getProposals=async (e)=>{
+    const getProposals = async (e) => {
         e.preventDefault()
-        const transactionRes=await contract.getProposals(listing.Listings.listing_index)
+        const transactionRes = await contract.getProposals(listing.Listings.listing_index)
         console.log(transactionRes)
         return transactionRes
     }
@@ -72,24 +83,25 @@ const Details = ({ item }) => {
             </div>
         )
     }
-    const slides = [
-        {
-            url: "/apt2.jpeg",
-        },
-        {
-            url: "/apt4.jpeg",
-        },
-        {
-            url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
-        },
 
-        {
-            url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
-        },
-        {
-            url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-        },
-    ]
+    // const slides = [
+    //     {
+    //         url: "http://localhost/api/images/" + listing_id + "?id=1",
+    //     },
+    //     {
+    //         url: "http://localhost/api/images/" + listing_id + "?id=3",
+    //     },
+    //     {
+    //         url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
+    //     },
+
+    //     {
+    //         url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
+    //     },
+    //     {
+    //         url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
+    //     },
+    // ]
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0
@@ -123,6 +135,15 @@ const Details = ({ item }) => {
                             style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                             className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
                         ></div>
+                        {/* <Image
+                            src={"http://localhost/api/images/" + listing_id + "?compressed=true"}
+                            className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
+                            fill
+                        /> */}
+                        {/* <image
+                            src={src}
+                            className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
+                        ></image> */}
                         {/* Left Arrow */}
                         <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
                             <BsChevronCompactLeft onClick={prevSlide} size={30} />
@@ -181,7 +202,7 @@ const Details = ({ item }) => {
                                     description={"Property ID"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={furnish_config[data.furnish_status-1]}
+                                    title={furnish_config[data.furnish_status - 1]}
                                     description={"Furnishing Status"}
                                 ></FeatureCard>
                                 <FeatureCard
@@ -273,12 +294,13 @@ const Details = ({ item }) => {
                         <FixedLocation lat={data.latitude} lng={data.longitude} />
                     </div>
                 </div>
-                <button className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => createProposal(event)}>
-                 Create Proposal
+                <button
+                    className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={() => createProposal(event)}
+                >
+                    Create Proposal
                 </button>
             </div>
-            
         </>
     )
 }
