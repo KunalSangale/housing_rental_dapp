@@ -83,7 +83,7 @@ export default (props) => {
                     >
                         <p
                             className={
-                                "font-bold text-lg select-none text-center " +
+                                "block uppercase tracking-wide text-xs font-bold select-none text-center " +
                                 getString(e.prop, true)
                             }
                         >
