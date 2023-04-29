@@ -1,9 +1,14 @@
 import React, { useEffect } from "react"
 import FeatureCard from "@/components/Listings/FeatureCard.js"
+import { Input } from "@mui/joy"
+import { addressShorten } from "@/utils"
+import { EyeIcon } from "@heroicons/react/24/outline"
+import { ArrowPathIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import { ImCross } from "react-icons/im"
 import Link from "next/link"
 import { AiFillCheckCircle } from "react-icons/ai"
+import { formatUnits, parseEther, parseUnits } from "@ethersproject/units"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
 import { RxDotFilled } from "react-icons/rx"
 import { useRouter } from "next/router"
@@ -21,6 +26,13 @@ var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
 const Details = ({ item }) => {
     const { address, isConnected } = useAccount()
     const { data: signer, isError } = useSigner()
+    const [proposalData, setProposalData] = useState({ rent: 0, months: 1 })
+    const [index, setIndex] = useState(null)
+
+    const handleProposalChange = (e, i) => {
+        setProposalData({ ...proposalData, [i]: e.target.value })
+    }
+
     const contract = useContract({
         address: contractAddress.deployed_at,
         abi: housingConfig.abi,
@@ -32,6 +44,7 @@ const Details = ({ item }) => {
     const { listing_id } = router.query
     const [listing, setListing] = useState(null)
     const [isLoading, setLoading] = useState(true)
+    const [proposals, setProposals] = useState(null)
     const [count, setCount] = useState(0)
     const [slides, setSlides] = useState([])
     // var slides = []
@@ -56,17 +69,30 @@ const Details = ({ item }) => {
     }, [listing_id])
     console.log(listing)
     var data = listing && listing !== undefined && listing.Listings
+    // console.log("m",listing.Listings.listing_index)
+    console.log("index", index)
+
+    const [isGetCalled, setGetCalled] = useState(false)
+
     const createProposal = async (e) => {
-        e.preventDefault()
-        const transactionRes = await contract.createProposal(listing.Listings.listing_index)
+        // e.preventDefault()
+        console.log(listing.Listings.listing_index)
+        const transactionRes = await contract.createProposal({
+            listingIndex: listing.Listings.listing_index,
+            rentAmount: parseEther(proposalData.rent),
+            sender: address,
+            months: proposalData.months,
+        })
 
         return transactionRes.wait(1)
     }
+    console.log(proposals)
     const getProposals = async (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const transactionRes = await contract.getProposals(listing.Listings.listing_index)
-        console.log(transactionRes)
-        return transactionRes
+        // alert(transactionRes)
+        setProposals(transactionRes)
+        setGetCalled(true)
     }
     var propData = listing && listing !== undefined && listing.PropertyOwnership
     if (isLoading) {
@@ -128,7 +154,7 @@ const Details = ({ item }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <div className="home-container w-full">
+            <div className="home-container w-full px-20 pb-8">
                 <div className="home-container2">
                     <div className="max-w-[1400px] h-[500px] w-full m-auto  relative group">
                         <div
@@ -202,6 +228,7 @@ const Details = ({ item }) => {
                                     description={"Property ID"}
                                 ></FeatureCard>
                                 <FeatureCard
+                                    title={furnish_config[data.furnish_status - 1]}
                                     title={furnish_config[data.furnish_status - 1]}
                                     description={"Furnishing Status"}
                                 ></FeatureCard>
@@ -294,12 +321,88 @@ const Details = ({ item }) => {
                         <FixedLocation lat={data.latitude} lng={data.longitude} />
                     </div>
                 </div>
-                <button
-                    className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => createProposal(event)}
-                >
-                    Create Proposal
-                </button>
+                <div className="flex flex-col w-full p-3 items-stretch space-y-4">
+                    <h1 className="home-text">Proposals</h1>
+                    {!isGetCalled && (
+                        <button
+                            className="block flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-40 flex rounded-lg border hover:bg-slate-100"
+                            onClick={getProposals}
+                        >
+                            {" "}
+                            <EyeIcon className="h-12 w-12 text-gray-700" />
+                            view Proposals
+                        </button>
+                    )}
+                    {isGetCalled && proposals === null && (
+                        <PulseLoader color={"#475569"} className="m-auto mt-40 w-40 " size={16} />
+                    )}
+                    {isGetCalled && proposals !== null && (
+                        <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4">
+                            {proposals.map((e, i) => {
+                                return (
+                                    <div className="border rounded-lg flex flex-col space-y-2 w-60 ">
+                                        <div className="pt-8">
+                                            <p className="text-xs font-bold text-gray-700 tracking-wide block p-3 pb-0">
+                                                ETH
+                                            </p>
+                                            <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline truncate    ">
+                                                {formatUnits(e.rentAmount, 18)}
+                                            </p>
+                                            <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
+                                                /pm
+                                            </p>
+                                        </div>
+                                        <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
+                                            <p className="text-sm font-bold text-gray-600 tracking-wide block">
+                                                BY {addressShorten(e.sender)}
+                                            </p>
+                                            <p className="text-sm font-bold text-gray-600 tracking-wide block">
+                                                {formatUnits(e.months, 0)} months
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                            <button
+                                className="block space-y-2 flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-48 rounded-lg border hover:bg-slate-100"
+                                onClick={getProposals}
+                            >
+                                <ArrowPathIcon className="h-12 w-12 text-gray-700" />
+                                <p>Refresh Proposals</p>
+                            </button>
+                        </div>
+                    )}
+                    <div className="border-b mx-12"></div>
+                    <div className="flex flex-col space-y-2 w-60 p-3 border rounded-lg pb-4">
+                        <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Create proposal
+                        </p>
+                        <Input
+                            color="neutral"
+                            variant="outlined"
+                            size="sm"
+                            onChange={(e) => handleProposalChange(e, "rent")}
+                            // className="basis-1/6"
+                            placeholder="Proposed Rent"
+                            value={proposalData.rent}
+                        />
+                        <Input
+                            color="neutral"
+                            variant="outlined"
+                            size="sm"
+                            onChange={(e) => handleProposalChange(e, "months")}
+                            // className="basis-1/6"
+                            placeholder="Tenure"
+                            value={proposalData.months}
+                        />
+                        <button
+                            className="text-white bg-blue-700 hover:bg-blue-800  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onClick={() => createProposal(event)}
+                        >
+                            Create Proposal
+                        </button>
+                    </div>
+                </div>
             </div>
         </>
     )
