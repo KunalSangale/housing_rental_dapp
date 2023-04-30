@@ -70,7 +70,14 @@ export default (props) => {
             data.append("deposit", data.get("eth_deposit").toString())
             data.append("bhk", data.get("bhk").toString())
             data.append("bathrooms", data.get("bathrooms"))
+            data.append("property_type", data.get("property_type"))
+            data.append("mntn", data.get("mntn"))
+            data.append("floor", data.get("floor"))
+            data.append("total_floors", data.get("total_floors"))
+            data.append("age", data.get("age"))
+            data.append("poss_date", data.get("poss_date").toString())
             data.append("furnish_status", data.get("furnish_status"))
+            data.append("pref_tenant", data.get("pref_tenant"))
             const hasGym = data.get("hasGym") == "TRUE" ? true : false
             const isPetFriendly = data.get("isPetFriendly") == "TRUE" ? true : false
             const hasPark = data.get("hasPark") == "TRUE" ? true : false
@@ -319,6 +326,126 @@ export default (props) => {
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Property Type
+                        </label>
+                        <div className="relative">
+                            <select
+                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                name="property_type"
+                            >
+                                <option value={1}>Apartment</option>
+                                <option value={2}>Independent House/Villa</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg
+                                    className="fill-current h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Monthly Maintenance
+                        </label>
+                        <div className="relative">
+                            <select
+                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                name="mntn"
+                            >
+                                <option value={1}>Maintenance Included</option>
+                                <option value={2}>Maintenance Excluded</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg
+                                    className="fill-current h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Floor
+                        </label>
+                        <input
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            name="floor"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="Enter floor"
+                        />
+                    </div>
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Total Floors
+                        </label>
+                        <input
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            name="total_floors"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="Enter total floors in the building"
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Property Age
+                        </label>
+                        <input
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            name="age"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="Enter age of property (years)"
+                        />
+                    </div>
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                        >
+                            Possession
+                        </label>
+                        <input
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            name="poss_date"
+                            type="date"
+                            placeholder="Enter possession date"
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-state"
                         >
                             Furnishing Status
@@ -331,6 +458,33 @@ export default (props) => {
                                 <option value={1}>Fully Furnished</option>
                                 <option value={2}>Semi Furnished</option>
                                 <option value={3}>Not Furnished</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg
+                                    className="fill-current h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-state"
+                        >
+                            Preferred Tenant
+                        </label>
+                        <div className="relative">
+                            <select
+                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                name="pref_tenant"
+                            >
+                                <option value={1}>Family</option>
+                                <option value={2}>Bachelor</option>
+                                <option value={3}>Anyone</option>
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg
