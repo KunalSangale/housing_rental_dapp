@@ -22,6 +22,7 @@ import { watchContractEvent } from "@wagmi/core"
 import { PulseLoader } from "react-spinners"
 import FixedLocation from "@/components/MapPicker/FixedLocation"
 import Image from "next/image"
+import ProposalContainer from "@/components/Dashboard/ProposalContainer"
 var furnish_config = ["Fully Furnished", "Semi-Furnished", "Not Furnished"]
 var pref_tenant_config = ["Family", "Bachelor", "Anyone"]
 var property_config = ["Apartment", "Independent House/Villa"]
@@ -359,29 +360,7 @@ const Details = ({ item }) => {
                     {isGetCalled && proposals !== null && (
                         <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4">
                             {proposals.map((e, i) => {
-                                return (
-                                    <div className="border rounded-lg flex flex-col space-y-2 w-60 ">
-                                        <div className="pt-8">
-                                            <p className="text-xs font-bold text-gray-700 tracking-wide block p-3 pb-0">
-                                                ETH
-                                            </p>
-                                            <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline truncate    ">
-                                                {formatUnits(e.rentAmount, 18)}
-                                            </p>
-                                            <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
-                                                /pm
-                                            </p>
-                                        </div>
-                                        <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
-                                            <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                BY {addressShorten(e.sender)}
-                                            </p>
-                                            <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                {formatUnits(e.months, 0)} months
-                                            </p>
-                                        </div>
-                                    </div>
-                                )
+                                return <ProposalContainer e={e} />
                             })}
                             <button
                                 className="block space-y-2 flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-48 rounded-lg border hover:bg-slate-100"
