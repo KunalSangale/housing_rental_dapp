@@ -43,7 +43,7 @@ export default () => {
                         alt="Rental Logo"
                     />   */}
                     <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                        Rental
+                        Rento
                     </span>
                 </Link>
                 <div className="flex md:order-2 items-center">

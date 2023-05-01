@@ -43,7 +43,7 @@ export default (props) => {
             ></Link>
             <div className="relative mt-32">
                 <p className="text-5xl font-bold text-white tracking-wide block ml-4 pt-0 opacity-100 inline truncate">
-                    {formatUnits(props.e.Listing.eth_rent, 0)}
+                    {props.e.Listing.eth_rent}
                 </p>
                 <p className="text-white font-bold ml-1 text-xs inline">ETH</p>
                 <p className="text-xs font-bold text-white tracking-wide block pt-0 ml-4 truncate ">

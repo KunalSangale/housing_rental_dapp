@@ -158,7 +158,7 @@ export default (props) => {
                                                         ETH
                                                     </p>
                                                     <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline">
-                                                        {formatUnits(proposal.rentAmount, 0)}
+                                                        {formatUnits(proposal.rentAmount, 18)}
                                                     </p>
                                                     <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
                                                         /pm
@@ -186,6 +186,7 @@ export default (props) => {
                                         <AgrementForm
                                             listing_index={e.listing_index}
                                             index={i}
+                                            metadata_id={e.metadata_id}
                                             address={e.sender}
                                             handleClose={togglePopup}
                                         />

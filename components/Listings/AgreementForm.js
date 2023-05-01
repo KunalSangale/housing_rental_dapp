@@ -16,34 +16,45 @@ const Popup = (props) => {
         abi: housingConfig.abi,
         signerOrProvider: signer,
     })
+    const [files, setFile] = useState()
+    const handleFileInputChange = (e) => {
+        if (e.target.files.length > 0) {
+            setFile(e.target.files[0])
+        }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
-        console.log("datamonths", data.get("months"))
-        const transactionRes = await contract.acceptProposal(
-            props.listing_index,
-            props.index,
-            1,
-            "hash20412",
-            data.get("dspt"),
-            Date.parse(data.get("start_date")) / 1000,
-            data.get("months"),
-            parseEther(data.get("eth_rent")),
-            parseInt(data.get("eth_deposit")),
-            "xya"
-            // (listingIndex = props.listing_index),
-            // (index = props.index),
-            // (docID = "1"),
-            // (docHash = "9r802j3"),
-            // (middleman = data.get("dspt")),
-            // (startDate = data.get("start_date").toString()),
-            // (months = data.get("months")),
-            // (rent = parseEther(data.get("eth_rent"))),
-            // (deposit = parseEther(data.get("eth_deposit"))),
-            // (landlordSign = "testSign")
-        )
-
-        return transactionRes.wait(1)
+        // files.forEach((file, i) => {
+        //     data.append(`uploaded_files`, file, file.name)
+        // })
+        data.append(`uploaded_files`, files)
+        data.append("metadata_id", props.metadata_id.toString())
+        console.log("mid", props.metadata_id)
+        fetch("http://localhost/api/upload_agreement", {
+            method: "POST",
+            body: data,
+        })
+            .then((res) => res.json())
+            .then(async (data) => {
+                if (!data.error) {
+                    console.log("Stage 2... Calling acceptProposal in blockchain")
+                    const dat = new FormData(e.target)
+                    const transactionRes = await contract.acceptProposal(
+                        props.listing_index,
+                        props.index,
+                        1,
+                        "hash20412",
+                        dat.get("dspt"),
+                        Date.parse(dat.get("start_date")) / 1000,
+                        dat.get("months"),
+                        parseEther(dat.get("eth_rent")),
+                        parseInt(dat.get("eth_deposit")),
+                        "xya"
+                    )
+                    return transactionRes.wait(1)
+                }
+            })
     }
     return (
         <div className="popup-box">
@@ -132,8 +143,11 @@ const Popup = (props) => {
                             </label>
                             <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                name="agrmnt"
+                                name="files[]"
                                 type="file"
+                                multiple="multiple"
+                                onChange={handleFileInputChange}
+                                accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                                 placeholder="Select files"
                                 required
                             />
