@@ -24,6 +24,7 @@ const Popup = (props) => {
         }
     }
     console.log(props.index, props.listing_index)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
@@ -64,13 +65,7 @@ const Popup = (props) => {
                         "xya"
                     )
                     console.log(transactionRes)
-                    return (
-                        transactionRes.wait(1),
-                        fetch("http://localhost/api/delist", {
-                            method: "PUT",
-                            body: props.property_id.toString(),
-                        }).then((res) => res.json())
-                    )
+                    return transactionRes.wait(1), props.unlist()
                 }
             })
             .then((e) => {
@@ -195,12 +190,6 @@ const Popup = (props) => {
                             >
                                 Submit
                             </button>
-                            <a
-                                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                href="#"
-                            >
-                                Forgot Password?
-                            </a>
                         </div>
                     </form>
                 </div>

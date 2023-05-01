@@ -6,7 +6,7 @@ import contractAddress from "../../hardhat.json"
 import { ArrowPathIcon } from "@heroicons/react/24/outline"
 import { formatUnits } from "@ethersproject/units"
 import { addressShorten } from "@/utils"
-
+import { useRouter } from "next/navigation"
 import AgrementForm from "./AgreementForm"
 export default (props) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +14,7 @@ export default (props) => {
     const togglePopup = () => {
         setIsOpen(!isOpen)
     }
-
+    const { push } = useRouter()
     const { address, isConnected } = useAccount()
     const { data: signer, isError } = useSigner()
     const [index, setIndex] = useState(null)
@@ -111,7 +111,7 @@ export default (props) => {
             </h4>
             {listings.map((e, i) => {
                 return (
-                    <div className="bg-gray-50 rounded border" key={i}>
+                    <div className="bg-gray-50 rounded border cursor-pointer" key={i}>
                         <div className="py-4 px-8 w-full  flex justify-between">
                             <div>
                                 <p>{e.Address}</p>
@@ -123,10 +123,17 @@ export default (props) => {
                             <div className="flex flex-col space-y-2">
                                 <button
                                     className="bg-blue-500 h-fit  px-8 py-2 text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
+                                    onClick={() => push("/listing/" + e.metadata_id)}
+                                >
+                                    VIEW
+                                </button>
+                                <button
+                                    className="bg-blue-500 h-fit  px-8 py-2 text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
                                     onClick={() => unlistProperty(e.metadata_id)}
                                 >
                                     UNLIST
                                 </button>
+
                                 <button
                                     className="bg-blue-500 h-fit  px-8 py-2  text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
                                     onClick={() => {
@@ -156,6 +163,9 @@ export default (props) => {
                                                         metadata_id={e.metadata_id}
                                                         property_id={e.property_id}
                                                         address={e.sender}
+                                                        unlist={() =>
+                                                            unlistProperty(e.metadata_id)
+                                                        }
                                                         handleClose={togglePopup}
                                                     />
                                                 )}

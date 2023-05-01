@@ -77,8 +77,20 @@ const Details = ({ item }) => {
     console.log(data !== null && data.listing_index)
     // console.log("m",listing.Listings.listing_index)
     console.log("index", index)
-
+    // const [history, setHistory] = useState(null)
     const [isGetCalled, setGetCalled] = useState(false)
+
+    // const getHistory = () => {
+    //     contract
+    //         .getHistory(propData.SaleDeedNumber)
+    //         .then((r) => {
+    //             console.log(r)
+    //             setHistory(r)
+    //         })
+    //         .catch((e) => {
+    //             console.log(e)
+    //         })
+    // }
 
     const createProposal = async (e) => {
         // e.preventDefault()
@@ -401,6 +413,29 @@ const Details = ({ item }) => {
                             Create Proposal
                         </button>
                     </div>
+                    {/* <h1 className="home-text">History</h1>
+                    <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4">
+                        {history !== null &&
+                            history.map((e, i) => {
+                                return (
+                                    <Link className="w-60 h-60 bg-slate-100 flex flex-col border rounded-md relative">
+                                        <img
+                                            src={
+                                                "http://localhost/api/thumbnail/" +
+                                                e.metadataID +
+                                                "?compressed=true"
+                                            }
+                                            className=" object-cover h-full w-60 absolute rounded-md"
+                                        ></img>
+                                        <div className="relative mt-32">
+                                            <p className="text-5xl font-bold text-white tracking-wide block ml-4 pt-0 opacity-100 inline truncate">
+                                                {e.metadataID}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
+                    </div> */}
                 </div>
             </div>
         </>
