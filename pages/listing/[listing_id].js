@@ -22,7 +22,11 @@ import { watchContractEvent } from "@wagmi/core"
 import { PulseLoader } from "react-spinners"
 import FixedLocation from "@/components/MapPicker/FixedLocation"
 import Image from "next/image"
-var furnish_config = ["Not Furnished", "Semi-Furnished", "Fully Furnished"]
+var furnish_config = ["Fully Furnished", "Semi-Furnished", "Not Furnished"]
+var pref_tenant_config = ["Family", "Bachelor", "Anyone"]
+var property_config = ["Apartment", "Independent House/Villa"]
+var mntn_config = ["Maintenance Included", "Maintenance Excluded"]
+
 const Details = ({ item }) => {
     const { address, isConnected } = useAccount()
     const { data: signer, isError } = useSigner()
@@ -87,7 +91,6 @@ const Details = ({ item }) => {
 
         return transactionRes.wait(1)
     }
-    console.log(proposals)
     const getProposals = async (e) => {
         // e.preventDefault()
         const transactionRes = await contract.getProposals(listing.Listings.listing_index)
@@ -95,6 +98,7 @@ const Details = ({ item }) => {
         setProposals(transactionRes)
         setGetCalled(true)
     }
+    console.log(proposals)
     var propData = listing && listing !== undefined && listing.PropertyOwnership
     if (isLoading) {
         return (
@@ -198,14 +202,14 @@ const Details = ({ item }) => {
         />  */}
                     <div className="home-container3">
                         <div className="home-features">
-                            <h1 className="home-text">Overview</h1>
+                            {/* <h1 className="home-text">Overview</h1> */}
                             <div className="home-container4">
                                 <FeatureCard
                                     title={data.eth_rent + " ETH/month"}
-                                    description={"Rent"}
+                                    description={"Rent " + " (Including Maintenance)"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={data.deposit + " ETH"}
+                                    title={data.deposit + " ETH "}
                                     description={"Deposit"}
                                 ></FeatureCard>
                                 <FeatureCard
@@ -221,13 +225,17 @@ const Details = ({ item }) => {
                                     description={"Address"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={"Family"}
+                                    title={pref_tenant_config[data.pref_tenant - 1]}
                                     description={"Preferred Tenant"}
                                 ></FeatureCard>
                                 <FeatureCard
+                                    title={data.poss_date}
+                                    description={"Possession"}
+                                ></FeatureCard>
+                                {/* <FeatureCard
                                     title={data.property_id}
                                     description={"Property ID"}
-                                ></FeatureCard>
+                                ></FeatureCard> */}
                                 <FeatureCard
                                     title={furnish_config[data.furnish_status - 1]}
                                     description={"Furnishing Status"}
@@ -235,6 +243,18 @@ const Details = ({ item }) => {
                                 <FeatureCard
                                     title={propData.Area}
                                     description={"Area"}
+                                ></FeatureCard>
+                                <FeatureCard
+                                    title={property_config[data.property_type - 1]}
+                                    description={"Property Type"}
+                                ></FeatureCard>
+                                <FeatureCard
+                                    title={data.floor + " (out of " + data.total_floors + ")"}
+                                    description={"Floor"}
+                                ></FeatureCard>
+                                <FeatureCard
+                                    title={data.age + " years"}
+                                    description={"Property Age"}
                                 ></FeatureCard>
                             </div>
                         </div>
