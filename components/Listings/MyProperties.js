@@ -184,7 +184,8 @@ export default (props) => {
                                     </button>
                                     {isOpen && (
                                         <AgrementForm
-                                            index={e.listing_index}
+                                            listing_index={e.listing_index}
+                                            index={i}
                                             address={e.sender}
                                             handleClose={togglePopup}
                                         />
