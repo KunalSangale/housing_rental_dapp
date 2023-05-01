@@ -6,6 +6,7 @@ import contractAddress from "../../hardhat.json"
 import { watchContractEvent } from "@wagmi/core"
 import { formatUnits, parseEther, parseUnits } from "@ethersproject/units"
 const Popup = (props) => {
+    const crypto = require("crypto")
     console.log("Listing index", props.listing_index)
     console.log("index", props.index)
     const { address, isConnected } = useAccount()
@@ -29,6 +30,15 @@ const Popup = (props) => {
         //     data.append(`uploaded_files`, file, file.name)
         // })
         data.append(`uploaded_files`, files)
+        let fileContents = ""
+        const reader = new FileReader()
+        reader.onload = () => {
+            fileContents = reader.result
+            // const hash = sha256(fileContents)
+            // console.log(hash.toString())
+        }
+        reader.readAsBinaryString(files)
+        const fileHash = crypto.createHash("sha256").update(fileContents).digest("hex")
         data.append("metadata_id", props.metadata_id.toString())
         console.log("mid", props.metadata_id)
         fetch("http://localhost/api/upload_agreement", {
@@ -44,7 +54,7 @@ const Popup = (props) => {
                         props.listing_index,
                         props.index,
                         1,
-                        "hash20412",
+                        fileHash,
                         dat.get("dspt"),
                         Date.parse(dat.get("start_date")) / 1000,
                         dat.get("months"),
@@ -52,6 +62,7 @@ const Popup = (props) => {
                         parseInt(dat.get("eth_deposit")),
                         "xya"
                     )
+                    console.log(transactionRes)
                     return transactionRes.wait(1)
                 }
             })

@@ -23,6 +23,7 @@ export default (props) => {
     // const handleFileChange = (e) => {
     //     setFileList(e.target.files)
     // }
+    const crypto = require("crypto")
     const { address, isConnected } = useAccount()
     const [listenData, setListenData] = useState(null)
     const { data: signer, isError, isLoading } = useSigner()
@@ -113,7 +114,7 @@ export default (props) => {
                     const transactionRes = await contract.createListing({
                         index: 0,
                         metadataID: data.metadata_id,
-                        metadataHash: "has456456h",
+                        metadataHash: crypto.createHash("sha256").update(metadataID).digest("hex"),
                         landlord: address,
                     })
                     var unwatch
