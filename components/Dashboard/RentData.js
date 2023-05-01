@@ -25,6 +25,7 @@ const processLoadingConfig = [
     "Some Error Occured",
     "Transaction Successful",
     "Paying Rent",
+    "",
 ]
 export default (props) => {
     const [loading, setLoading] = useState(true)
@@ -270,12 +271,16 @@ export default (props) => {
                         (processLoading === 6 && <CheckCircleIcon className="h-8 w-8" />)}
                     {processLoading === 5 && <ExclamationCircleIcon className="h-8 w-8" />}
                     {processLoading < 4 && <PulseLoader />}
-                    {isRent && <p className="uppercase font-bold text-md">Paying Rent</p>}
+
+                    {isRent && <p className="uppercase font-bold text-lg">Paying Rent</p>}
                     {isRent && (
-                        <p className="uppercase font-bold text-md text-slate-600">
+                        <p className="uppercase font-bold text-md text-slate-600 py-0 ">
                             {props.active.Property.Address}
                         </p>
                     )}
+                    <p className="select-none text-lg my-4 ">
+                        {processLoadingConfig[processLoading]}
+                    </p>
                     <p className="text-xs text-slate-500 ">
                         Processing your transaction, please don't press back or refress button. You
                         will be redirected automatically after completion
