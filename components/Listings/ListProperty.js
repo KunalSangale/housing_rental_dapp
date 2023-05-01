@@ -130,7 +130,7 @@ export default (props) => {
                             metadataID: data.metadata_id,
                             metadataHash: crypto
                                 .createHash("sha256")
-                                .update(metadataID)
+                                .update(data.metadata_id)
                                 .digest("hex"),
                             landlord: address,
                         },
@@ -185,6 +185,8 @@ export default (props) => {
                     console.log("error")
                     setStage(5)
                     setTimeout(() => setStage(0), 4000)
+                    console.log(e)
+
                     throw new Error("listing already exists")
                 }
             })
@@ -196,6 +198,7 @@ export default (props) => {
             .catch((e) => {
                 setStage(5)
                 setTimeout(() => setStage(0), 4000)
+                console.log(e)
             })
     }
 
