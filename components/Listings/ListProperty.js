@@ -6,11 +6,22 @@ import housingConfig from "../../../hardhat-rental/artifacts/contracts/HousingRe
 import contractAddress from "../../hardhat.json"
 import { watchContractEvent } from "@wagmi/core"
 import LocationPicker from "../MapPicker/LocationPicker"
+import { CheckCircleIcon } from "@heroicons/react/24/outline"
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { PulseLoader } from "react-spinners"
 const containerStyle = {
     width: "400px",
     height: "400px",
 }
-
+const stageConfig = [
+    "",
+    "Uploading Data",
+    "Waiting for User Approval",
+    "Waiting for transaction confirmation",
+    "Listing Created",
+    "Error Occured",
+    "Final Touches",
+]
 const DefaultLocation = { lat: -3.745, lng: -38.523 }
 const DefaultZoom = 10
 export default (props) => {
@@ -18,7 +29,7 @@ export default (props) => {
     const [selectedLocation, setLocation] = useState(null)
     // const [location, setLocation] = useState(defaultLocation)
     const [zoom, setZoom] = useState(DefaultZoom)
-
+    const [stage, setStage] = useState(0)
     // const [fileList, setFileList] = useState(null)
     // const handleFileChange = (e) => {
     //     setFileList(e.target.files)
@@ -101,6 +112,7 @@ export default (props) => {
         data.append("latitude", selectedLocation.lat)
         data.append("longitude", selectedLocation.lng)
         data.append("details", "test 123")
+        setStage(1)
         console.log("Stage 1... Uploading data to db")
         // 👇 Uploading the files using the fetch API to the server
         fetch("http://localhost/api/create_listing", {
@@ -110,13 +122,20 @@ export default (props) => {
             .then((res) => res.json())
             .then(async (data) => {
                 if (!data.error) {
+                    setStage(2)
                     console.log("Stage 2... Creating Listing in blockchain")
-                    const transactionRes = await contract.createListing({
-                        index: 0,
-                        metadataID: data.metadata_id,
-                        metadataHash: crypto.createHash("sha256").update(metadataID).digest("hex"),
-                        landlord: address,
-                    })
+                    const transactionRes = await contract.createListing(
+                        {
+                            index: 0,
+                            metadataID: data.metadata_id,
+                            metadataHash: crypto
+                                .createHash("sha256")
+                                .update(metadataID)
+                                .digest("hex"),
+                            landlord: address,
+                        },
+                        props.active.SaleDeedNumber
+                    )
                     var unwatch
                     unwatch = watchContractEvent(
                         {
@@ -127,6 +146,8 @@ export default (props) => {
                         (id, newListing, sender) => {
                             console.log(id, newListing, sender)
                             setListenData(id)
+                            setStage(6)
+
                             fetch("http://localhost/api/update_index", {
                                 method: "POST",
                                 headers: {
@@ -134,24 +155,36 @@ export default (props) => {
                                 },
                                 body: JSON.stringify({
                                     wallet_address: address,
-                                    property_id: props.active.SaleDeedNumber,
+                                    property_id: data.metadata_id,
                                     index: parseInt(id.toString()),
                                 }),
                             })
                                 .then((r) => r.json())
                                 .then((data) => {
                                     console.log("Stage 5: Done")
+                                    setStage(4)
+                                    setTimeout(() => {
+                                        setStage(0)
+                                        props.goBack()
+                                    }, 4000)
+
                                     console.log("id", id.toString()), console.log(data)
-                                    props.goBack()
                                 })
-                                .catch((e) => console.log)
+                                .catch((e) => {
+                                    console.log(e)
+                                    setStage(5)
+                                    setTimeout(() => setStage(0), 4000)
+                                })
                             unwatch()
                         }
                     )
                     console.log("Stage 3... Waiting for block confirmations")
+                    setStage(3)
                     return transactionRes.wait(1)
                 } else {
                     console.log("error")
+                    setStage(5)
+                    setTimeout(() => setStage(0), 4000)
                     throw new Error("listing already exists")
                 }
             })
@@ -160,11 +193,27 @@ export default (props) => {
 
                 console.log(r)
             })
+            .catch((e) => {
+                setStage(5)
+                setTimeout(() => setStage(0), 4000)
+            })
     }
 
     //const files = fileList ? [...fileList] : []
     return (
         <div>
+            {stage > 0 && (
+                <div className="w-screen flex flex-col items-center justify-center fixed bg-white top-0 left-0 z-[999] space-around space-y-8 h-screen">
+                    <p className="text-5xl font-semibold whitespace-nowrap ">Rento</p>
+                    {stage === 4 && <CheckCircleIcon className="h-8 w-8" />}
+                    {stage === 5 && <ExclamationCircleIcon className="h-8 w-8" />}
+                    {stage !== 4 && stage !== 5 && <PulseLoader />}
+                    <p className="select-none text-lg my-4">{stageConfig[stage]}</p>
+                    <p className="select-none text-xs text-slate-500 ">
+                        Processing your transaction, please don't press back or refress button.
+                    </p>
+                </div>
+            )}
             <form className="flex flex-col w-full md:px-32 mt-32" onSubmit={handleSubmit}>
                 <div className="flex flex-wrap -mx-3 mb-6 mt-100px">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
