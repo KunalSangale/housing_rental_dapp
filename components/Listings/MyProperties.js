@@ -27,21 +27,21 @@ export default (props) => {
     const [properties, setProperties] = useState([])
     const [listings, setListings] = useState([])
     const [trnx, setTrnx] = useState({})
-    const unlistProperty = (property_id) => {
+    const unlistProperty = (metadata_id) => {
         // console.log(property_id)
         fetch("http://localhost/api/unlist", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ wallet_address: address, property_id: property_id }),
+            body: JSON.stringify({ wallet_address: address, metadata_id: metadata_id }),
         })
             .then((r) => r.json())
             .then((data) => {
                 console.log(data)
                 if (data.found) {
                     let newListings = [...listings]
-                    newListings = newListings.filter((obj) => obj.property_id !== property_id)
+                    newListings = newListings.filter((obj) => obj.metadata_id !== metadata_id)
                     setListings(newListings)
                 }
             })
@@ -123,7 +123,7 @@ export default (props) => {
                             <div className="flex flex-col space-y-2">
                                 <button
                                     className="bg-blue-500 h-fit  px-8 py-2 text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
-                                    onClick={() => unlistProperty(e.property_id)}
+                                    onClick={() => unlistProperty(e.metadata_id)}
                                 >
                                     UNLIST
                                 </button>
@@ -148,31 +148,43 @@ export default (props) => {
                                 <div className="grid grid-cols-2 md:grid-cols-4 justify-items-start gap-x-4 gap-y-4">
                                     {trnx[i].map((proposal, index1) => {
                                         return (
-                                            <div
-                                                className="border rounded-lg flex flex-col space-y-2 w-60 "
-                                                onClick={togglePopup}
-                                                key={index1}
-                                            >
-                                                <div className="pt-8">
-                                                    <p className="text-xs font-bold text-gray-700 tracking-wide block p-3 pb-0">
-                                                        ETH
-                                                    </p>
-                                                    <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline">
-                                                        {formatUnits(proposal.rentAmount, 18)}
-                                                    </p>
-                                                    <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
-                                                        /pm
-                                                    </p>
+                                            <>
+                                                {isOpen && (
+                                                    <AgrementForm
+                                                        listing_index={e.listing_index}
+                                                        index={index1}
+                                                        metadata_id={e.metadata_id}
+                                                        address={e.sender}
+                                                        handleClose={togglePopup}
+                                                    />
+                                                )}
+                                                <div
+                                                    className="border rounded-lg flex flex-col space-y-2 w-60 "
+                                                    onClick={togglePopup}
+                                                    key={index1}
+                                                >
+                                                    <div className="pt-8">
+                                                        <p className="text-xs font-bold text-gray-700 tracking-wide block p-3 pb-0">
+                                                            ETH
+                                                        </p>
+                                                        <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline">
+                                                            {formatUnits(proposal.rentAmount, 18)}
+                                                        </p>
+                                                        <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
+                                                            /pm
+                                                        </p>
+                                                    </div>
+                                                    <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
+                                                        <p className="text-sm font-bold text-gray-600 tracking-wide block">
+                                                            BY {addressShorten(proposal.sender)}
+                                                        </p>
+                                                        <p className="text-sm font-bold text-gray-600 tracking-wide block">
+                                                            {formatUnits(proposal.months, 0)}{" "}
+                                                            months
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
-                                                    <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                        BY {addressShorten(proposal.sender)}
-                                                    </p>
-                                                    <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                        {formatUnits(proposal.months, 0)} months
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            </>
                                         )
                                     })}
                                     <button
@@ -182,15 +194,6 @@ export default (props) => {
                                         <ArrowPathIcon className="h-12 w-12 text-gray-700" />
                                         <p>Refresh Proposals</p>
                                     </button>
-                                    {isOpen && (
-                                        <AgrementForm
-                                            listing_index={e.listing_index}
-                                            index={i}
-                                            metadata_id={e.metadata_id}
-                                            address={e.sender}
-                                            handleClose={togglePopup}
-                                        />
-                                    )}
                                 </div>
                             </div>
                         ) : (

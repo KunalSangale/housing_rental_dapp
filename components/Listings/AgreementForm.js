@@ -23,6 +23,7 @@ const Popup = (props) => {
             setFile(e.target.files[0])
         }
     }
+    console.log(props.index, props.listing_index)
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
@@ -59,12 +60,15 @@ const Popup = (props) => {
                         Date.parse(dat.get("start_date")) / 1000,
                         dat.get("months"),
                         parseEther(dat.get("eth_rent")),
-                        parseInt(dat.get("eth_deposit")),
+                        parseEther(dat.get("eth_deposit")),
                         "xya"
                     )
                     console.log(transactionRes)
                     return transactionRes.wait(1)
                 }
+            })
+            .then((e) => {
+                props.handleClose()
             })
     }
     return (

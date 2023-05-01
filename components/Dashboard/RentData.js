@@ -1,5 +1,6 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline"
 import { useState, useEffect, use } from "react"
+import { ArrowRightIcon } from "@heroicons/react/24/outline"
 import { PulseLoader } from "react-spinners"
 import { formatUnits, parseEther, parseUnits } from "@ethersproject/units"
 import { useAccount, useContract, useSigner, useSignMessage } from "wagmi"
@@ -36,6 +37,7 @@ export default (props) => {
     const [processLoading, setProcessLoading] = useState(0)
     const { data: signer, isError } = useSigner()
     const [isRent, setPayingRent] = useState(false)
+    const [isCustom, setCustom] = useState(false)
     const { signMessageAsync } = useSignMessage()
     const [tempDate, setTempDate] = useState(null)
     const contract = useContract({
@@ -61,12 +63,43 @@ export default (props) => {
         })
     }
 
+    const endAgreement = () => {
+        if (new Date().getDate() + 30 * rentData.months > tempDate && rentData.status == 2) {
+            contract
+                .endAgreement(props.active.Listing.listing_index)
+                .then((r) => {
+                    r.wait(1)
+                        .then((res) => {
+                            getRentData()
+                            alert("Ended Successfully")
+                        })
+                        .catch((e) => {
+                            console.log(e)
+
+                            alert("some error occurred")
+                        })
+                })
+                .catch((e) => {
+                    console.log(e)
+                    alert("some error occurred")
+                })
+        } else {
+            alert("Tenure can only end after the rent period is over")
+        }
+    }
+
     const payRent = (value) => {
         if (rentData.tenant !== address) {
             alert("Only tenant can pay rent")
+            return
+        }
+        if (value < 0.0001) {
+            alert("Value too small")
+            return
         }
         setPaymentValue({ ...paymentValue, custom: value })
         setPayingRent(true)
+        setCustom(false)
         setProcessLoading(2)
         contract
             .payRent(props.active.Listing.listing_index, { value: parseEther(value.toString()) })
@@ -75,6 +108,7 @@ export default (props) => {
                 e.wait(1)
                     .then((r) => {
                         setProcessLoading(6)
+                        getPaymentData()
                         setTimeout(() => {
                             setProcessLoading(0)
                             setPayingRent(false)
@@ -141,6 +175,7 @@ export default (props) => {
                 r.wait(1)
                     .then(() => {
                         setProcessLoading(6)
+                        getRentData()
                         setTimeout(() => setProcessLoading(0), 2000)
                     })
                     .catch((e) => {
@@ -229,7 +264,7 @@ export default (props) => {
                 setDataLoading(false)
                 setRent(result)
                 var d = new Date(parseInt(formatUnits(result.startDate, 0)) * 1000)
-                console.log()
+                console.log(d)
                 setTempDate(d)
             })
         }
@@ -254,9 +289,9 @@ export default (props) => {
         })
     }, [props.active.Listing.listing_index])
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col pb-16">
             <div className="m-8 flex">
-                <ChevronLeftIcon className="h-8 w-8" />
+                <ChevronLeftIcon className="h-8 w-8" onClick={() => props.setActive(null)} />
                 <p className="text-xl uppercase tracking-wide font-bold select-none text-gray-700">
                     Rent Details
                 </p>
@@ -264,19 +299,38 @@ export default (props) => {
             {processLoading > 0 && (
                 <div className="w-screen flex flex-col items-center justify-center bg-white top-0 left-0 z-[999] space-around space-y-8 h-screen absolute">
                     <p className="text-5xl font-semibold whitespace-nowrap ">Rento</p>
-                    {isRent && (
-                        <p className="uppercase font-bold text-3xl">ETH {paymentValue.custom}</p>
+                    {(isCustom || isRent) && (
+                        <div className="text-center">
+                            <p className="uppercase font-bold text-xl text-slate-600">
+                                Paying Rent
+                            </p>
+                            {props.active.Property.Address}
+                        </div>
+                    )}
+                    {isRent && !isCustom && (
+                        <p className="uppercase font-bold text-8xl">ETH {paymentValue.custom}</p>
                     )}
                     {processLoading === 4 ||
                         (processLoading === 6 && <CheckCircleIcon className="h-8 w-8" />)}
                     {processLoading === 5 && <ExclamationCircleIcon className="h-8 w-8" />}
                     {processLoading < 4 && <PulseLoader />}
-
-                    {isRent && <p className="uppercase font-bold text-lg">Paying Rent</p>}
-                    {isRent && (
-                        <p className="uppercase font-bold text-md text-slate-600 py-0 ">
-                            {props.active.Property.Address}
-                        </p>
+                    {isCustom && (
+                        <div className="flex items-center justify-center">
+                            <p className="text-9xl text-gray-400 font-bold inline">ETH </p>
+                            <input
+                                className="border-0 border-b-4 inline focus:border-blue-500 font-bold text-right px-6 focus:outline-none text-9xl w-[600px]"
+                                placeholder="0"
+                                onChange={(e) =>
+                                    setPaymentValue({ ...paymentValue, custom: e.target.value })
+                                }
+                            ></input>
+                            {/* <div className="h-[120px] w-[120px] "> */}
+                            <ArrowRightIcon
+                                className="h-[80px] w-[80px] p-3 font-bold hover:bg-blue-600 text-white rounded-full inline bg-blue-500"
+                                onClick={() => payRent(paymentValue.custom)}
+                            />
+                            {/* </div> */}
+                        </div>
                     )}
                     <p className="select-none text-lg my-4 ">
                         {processLoadingConfig[processLoading]}
@@ -413,14 +467,14 @@ export default (props) => {
                         <div
                             className={
                                 "uppercase flex items-center text-white space-around justify-center space-x-4 w-1/5 mx-auto py-3 text-center mt-4 font-bold text-xs text-slate-800 border shadow-md  rounded-full " +
-                                (rentData.status == 1 && new Date().getTime() > tempDate
+                                (rentData.status == 1 && new Date().getTime() > tempDate.getTime()
                                     ? "bg-blue-600 cursor-pointer hover:bg-blue-800"
                                     : " bg-indigo-700 cursor-not-allowed")
                             }
                             onClick={
-                                new Date().getTime() > tempDate &&
-                                rentData.status == 1 &&
-                                startTenure
+                                new Date().getTime() > tempDate.getTime() && rentData.status == 1
+                                    ? startTenure
+                                    : null
                             }
                         >
                             <p>Start Tenure </p>
@@ -433,14 +487,16 @@ export default (props) => {
                                     ? "bg-red-600 cursor-pointer hover:bg-red-800"
                                     : " bg-indigo-700 cursor-not-allowed")
                             }
+                            onClick={endAgreement}
                         >
                             <p>End Agreement </p>
                         </div>
                     </div>
-
-                    <p className="text-md uppercase tracking-wide mx-auto font-bold select-none text-gray-700 w-4/5 mt-8">
-                        payment DETAILS
-                    </p>
+                    {paymentData !== null && (
+                        <p className="text-md uppercase tracking-wide mx-auto font-bold select-none text-gray-700 w-4/5 mt-8">
+                            payment DETAILS
+                        </p>
+                    )}
                     {paymentData !== null && (
                         <div className="flex flex-col w-4/5 mt-2 mx-auto">
                             <div className="grid grid-cols-5 w-full font-bold">
@@ -519,7 +575,10 @@ export default (props) => {
                                             ? " bg-indigo-700 cursor-not-allowed"
                                             : "bg-blue-600 cursor-pointer hover:bg-blue-800")
                                     }
-                                    onClick={() => payRent(paymentValue.totalDue)}
+                                    onClick={() => {
+                                        setCustom(true)
+                                        setProcessLoading(8)
+                                    }}
                                 >
                                     <p>Pay in Advance (Custom Value) </p>
                                 </div>

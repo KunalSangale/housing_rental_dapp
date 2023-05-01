@@ -175,7 +175,7 @@ export default () => {
                     )}
                 </>
             ) : (
-                active && <RentData active={active} />
+                active && <RentData active={active} setActive={setActive} />
             )}
         </div>
     )

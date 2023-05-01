@@ -91,7 +91,7 @@ export default () => {
                                 Home
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 href="/browse"
                                 className={
@@ -101,8 +101,8 @@ export default () => {
                             >
                                 Browse
                             </Link>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <Link
                                 href="/list"
                                 className={
@@ -112,7 +112,7 @@ export default () => {
                             >
                                 List Property
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 href="/dashboard"

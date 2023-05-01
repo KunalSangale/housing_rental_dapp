@@ -111,42 +111,54 @@ export default (props) => {
             {isConnected ? (
                 <>
                     {!personalData.connected && (
-                        <div>
-                            <p>{addressShorten(address)}</p>
-                            <p className="font-nunito ml-2 font-semibold text-sm">
-                                {data?.formatted}
+                        <div className="w-80 border mx-auto p-6 flex flex-col items-center justify-start space-y-3 text-center ">
+                            <p className="text-3xl font-light text-gray-700">
+                                {addressShorten(address)}
                             </p>
-                            <p className=" ml-1.5 text-xs font-nunito font-bold">{data?.symbol}</p>
-                            <button onClick={() => props.handleStage(true)}>Connect Aadhar</button>
-                            {isSignedIn ? (
+                            <p className="font-nunito ml-2 font-semibold text-sm">
+                                {data?.symbol} {data?.formatted}
+                            </p>
+                            <button
+                                className="bg-blue-500 border-none text-white uppercase font-bold text-xs py-2 px-6 rounded-full"
+                                onClick={() => props.handleStage(true)}
+                            >
+                                Connect Aadhar
+                            </button>
+                            {/* {isSignedIn ? (
                                 <>
                                     <p>Signed in with ETH</p>{" "}
                                     <button onClick={logoutEth}>Logout</button>
                                 </>
                             ) : (
                                 <button onClick={signWithEth}>Sign in with eth</button>
-                            )}
+                            )} */}
                         </div>
                     )}
                     {personalData.connected && (
-                        <div>
-                            <p>
+                        <div className="w-80 border mx-auto p-6 flex flex-col items-center justify-start space-y-3 text-center ">
+                            <p className="text-3xl font-light text-gray-700">
                                 {personalData.firstName} {personalData.lastName}
                             </p>
-                            <p>**** **** {personalData.endsWith}</p>
+                            <p className="">**** **** {personalData.endsWith}</p>
+
                             <p className="font-nunito ml-2 font-semibold text-sm">
-                                {data?.formatted}
+                                {data?.symbol} {data?.formatted}
                             </p>
-                            <p className=" ml-1.5 text-xs font-nunito font-bold">{data?.symbol}</p>
-                            <button onClick={disconnectAadhar}>Disconnect</button>
-                            {isSignedIn ? (
+
+                            <button
+                                className="bg-blue-500 border-none text-white uppercase font-bold text-xs py-2 px-6 rounded-full"
+                                onClick={disconnectAadhar}
+                            >
+                                Disconnect Aadhar
+                            </button>
+                            {/* {isSignedIn ? (
                                 <>
                                     <p>Signed in with ETH</p>{" "}
                                     <button onClick={logoutEth}>Logout</button>
                                 </>
                             ) : (
                                 <button onClick={signWithEth}>Sign in with eth</button>
-                            )}
+                            )} */}
                         </div>
                     )}
                 </>
