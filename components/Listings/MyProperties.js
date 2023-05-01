@@ -186,6 +186,7 @@ export default (props) => {
                                         <AgrementForm
                                             listing_index={e.listing_index}
                                             index={i}
+                                            metadata_id={e.metadata_id}
                                             address={e.sender}
                                             handleClose={togglePopup}
                                         />

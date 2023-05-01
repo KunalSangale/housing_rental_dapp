@@ -3,12 +3,14 @@ import AdvancedOptions from "../HeroSection.js/AdvancedOptions"
 
 import SliderFilter from "./SliderFilter"
 
-export default () => {
+export default (props) => {
     const [rentVal, setRentVal] = useState([0, 5])
-    const [active, setActive] = useState({})
+    // const [active, setActive] = useState({})
     const [depositVal, setDepositVal] = useState([0, 5])
     const handleChange = (event, newValue, isDeposit) => {
-        isDeposit ? setDepositVal(newValue) : setRentVal(newValue)
+        isDeposit
+            ? (props.setDep(newValue), setDepositVal(newValue))
+            : (props.setRent(newValue), setRentVal(newValue))
     }
     const handleInputChange = (newVal, arrPos, isDeposit) => {
         let newRent = isDeposit ? [...depositVal] : [...rentVal]
@@ -17,8 +19,9 @@ export default () => {
             if (arrPos === 0) newRent[1] = parseFloat(newVal.target.value) + 0.5
             else newRent[0] = parseFloat(newVal.target.value) - 0.5
         }
-        isDeposit ? setDepositVal(newRent) : setRentVal(newRent)
+        isDeposit ? props.setDepMax(newRent) : props.setRentMax(newRent)
     }
+    //props.setQuery({ rent_max: rentVal, dep_max: depositVal })
     return (
         <div className="h-full  border-r md:basis-1/6 pt-24">
             <p className="font-bold text-slate-600 mx-8 tracking-wider border-b">FILTERS</p>
@@ -39,7 +42,7 @@ export default () => {
                 AMENITIES
             </p>
             <div className="mx-8 ">
-                <AdvancedOptions setActive={setActive} active={active} />
+                <AdvancedOptions setActive={props.setActive} active={props.active} />
             </div>
         </div>
     )
