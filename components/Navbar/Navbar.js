@@ -4,13 +4,14 @@ import { Connect } from "./Connect"
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import Nossr from "../Nossr"
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router"
 import { useTheme } from "next-themes"
-const inactiveLink = " text-gray-700 md:hover:text-blue-700 md:dark:hover:text-white dark:text-gray-400"
+const inactiveLink =
+    " text-gray-700 md:hover:text-blue-700 md:dark:hover:text-white dark:text-gray-400"
 const activeLink = " md:text-blue-700 dark:text-white"
 export default () => {
     const { systemTheme, theme, setTheme } = useTheme()
-    const { pathname } = useRouter();
+    const { pathname } = useRouter()
     const renderThemeChanger = () => {
         const currentTheme = theme === "system" ? systemTheme : theme
         if (currentTheme === "dark") {
@@ -81,7 +82,10 @@ export default () => {
                         <li>
                             <Link
                                 href="/"
-                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname==="/" ? activeLink : inactiveLink))}
+                                className={
+                                    "block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700" +
+                                    (pathname === "/" ? activeLink : inactiveLink)
+                                }
                                 aria-current="page"
                             >
                                 Home
@@ -90,7 +94,10 @@ export default () => {
                         <li>
                             <Link
                                 href="/browse"
-                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/browse") ? activeLink : inactiveLink))}
+                                className={
+                                    "block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700" +
+                                    (pathname.startsWith("/browse") ? activeLink : inactiveLink)
+                                }
                             >
                                 Browse
                             </Link>
@@ -98,17 +105,32 @@ export default () => {
                         <li>
                             <Link
                                 href="/list"
-                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/list") ? activeLink : inactiveLink))}
-                                
+                                className={
+                                    "block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700" +
+                                    (pathname.startsWith("/list/") ? activeLink : inactiveLink)
+                                }
                             >
                                 List Property
                             </Link>
                         </li>
                         <li>
                             <Link
+                                href="/dashboard"
+                                className={
+                                    "block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700" +
+                                    (pathname.startsWith("/dashboard") ? activeLink : inactiveLink)
+                                }
+                            >
+                                Dashboard
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 href="/account"
-                                className={("block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700"+(pathname.startsWith("/account") ? activeLink : inactiveLink))}
-
+                                className={
+                                    "block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700" +
+                                    (pathname.startsWith("/account") ? activeLink : inactiveLink)
+                                }
                             >
                                 My Account
                             </Link>

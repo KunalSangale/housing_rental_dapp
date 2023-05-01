@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { useAccount, useContract, useSigner } from "wagmi"
 import housingConfig from "../../../hardhat-rental/artifacts/contracts/HousingRental.sol/HousingRental.json"
 import contractAddress from "../../hardhat.json"
-import { useCollapse } from "react-collapsed"
 import { ArrowPathIcon } from "@heroicons/react/24/outline"
 import { formatUnits } from "@ethersproject/units"
 import { addressShorten } from "@/utils"
@@ -83,15 +82,22 @@ export default (props) => {
         }
     }, [])
 
-    const getProposals = async (index) => {
+    const handleExpand = (listingIndex, index, toShow) => {
+        if (trnx[index] === undefined) {
+            getProposals(listingIndex, index)
+        }
+        setExpanded({ ...isExpanded, [index]: toShow })
+    }
+
+    const getProposals = async (index, listIndex) => {
         //e.preventDefault()
-        setTrnx({ ...trnx, [index]: await contract.getProposals(index) })
+        setTrnx({ ...trnx, [listIndex]: await contract.getProposals(index) })
         console.log(trnx)
         return trnx
     }
 
     //const [ isExpanded, setExpanded ] = useState();
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
+    const [isExpanded, setExpanded] = useState({})
     const handleOnClick = (index) => {
         //setExpanded(!isExpanded);
     }
@@ -114,44 +120,45 @@ export default (props) => {
                                 <p>{e.property_id}</p>
                             </div>
 
-                            <div className="flex flex-col space-y-2" {...getToggleProps()}>
+                            <div className="flex flex-col space-y-2">
                                 <button
-                                    className="bg-blue-500 h-fit  px-8 py-2 text-white rounded-md font-bold uppercase tracking-wide text-xs"
+                                    className="bg-blue-500 h-fit  px-8 py-2 text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
                                     onClick={() => unlistProperty(e.property_id)}
                                 >
                                     UNLIST
                                 </button>
                                 <button
-                                    className="bg-blue-500 h-fit  px-8 py-2  text-white rounded-md font-bold uppercase tracking-wide text-xs"
+                                    className="bg-blue-500 h-fit  px-8 py-2  text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
                                     onClick={() => {
                                         {
-                                            getProposals(e.listing_index)
+                                            handleExpand(e.listing_index, i, !isExpanded[i])
                                         }
                                     }}
                                 >
-                                    View Proposals
+                                    {isExpanded[i] ? "Hide" : "View"} Proposals
                                 </button>
                             </div>
                         </div>
 
-                        {isExpanded && trnx[i] !== undefined ? (
+                        {isExpanded[i] && trnx[i] !== undefined ? (
                             <div className=" mx-8 mb-8">
                                 <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     proposals
                                 </p>
                                 <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4">
-                                    {trnx[i].map((e, i) => {
+                                    {trnx[i].map((proposal, index1) => {
                                         return (
                                             <div
                                                 className="border rounded-lg flex flex-col space-y-2 w-60 "
                                                 onClick={togglePopup}
+                                                key={index1}
                                             >
                                                 <div className="pt-8">
                                                     <p className="text-xs font-bold text-gray-700 tracking-wide block p-3 pb-0">
                                                         ETH
                                                     </p>
                                                     <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline">
-                                                        {formatUnits(e.rentAmount, 0)}
+                                                        {formatUnits(proposal.rentAmount, 0)}
                                                     </p>
                                                     <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
                                                         /pm
@@ -159,10 +166,10 @@ export default (props) => {
                                                 </div>
                                                 <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
                                                     <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                        BY {addressShorten(e.sender)}
+                                                        BY {addressShorten(proposal.sender)}
                                                     </p>
                                                     <p className="text-sm font-bold text-gray-600 tracking-wide block">
-                                                        {formatUnits(e.months, 0)} months
+                                                        {formatUnits(proposal.months, 0)} months
                                                     </p>
                                                 </div>
                                             </div>
@@ -170,7 +177,7 @@ export default (props) => {
                                     })}
                                     <button
                                         className="block space-y-2 flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-48 flex rounded-lg border hover:bg-slate-100"
-                                        onClick={() => getProposals(i)}
+                                        onClick={() => getProposals(e.listing_index, i)}
                                     >
                                         <ArrowPathIcon className="h-12 w-12 text-gray-700" />
                                         <p>Refresh Proposals</p>
@@ -200,7 +207,7 @@ export default (props) => {
                 )
             })}
             <h4 className="text font-semibold text-slate-800 border-b w-full tracking-wide">
-                UNLISTED PROPERTIES
+                ALL PROPERTIES
             </h4>
             {properties.map((e, i) => {
                 return (
@@ -215,7 +222,7 @@ export default (props) => {
                             <p>{e.SaleDeedNumber}</p>
                         </div>
                         <button
-                            className="bg-blue-500 h-fit px-8 py-2 text-sm text-white rounded-md font-bold uppercase tracking-wide text-xs"
+                            className="bg-blue-500 h-fit px-8 py-2 text-sm text-white rounded-md font-bold uppercase tracking-wide text-xs w-48"
                             onClick={() => props.changeActive(e)}
                         >
                             LIST

@@ -20,7 +20,7 @@ export default () => {
         isDeposit ? setDepositVal(newRent) : setRentVal(newRent)
     }
     return (
-        <div className="h-full bg-slate-50 border-r md:basis-1/6 pt-24">
+        <div className="h-full  border-r md:basis-1/6 pt-24">
             <p className="font-bold text-slate-600 mx-8 tracking-wider border-b">FILTERS</p>
             <SliderFilter
                 handleSliderChange={(n, p) => handleChange(n, p, false)}

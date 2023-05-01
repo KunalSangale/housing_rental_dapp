@@ -12,15 +12,15 @@ export default () => {
     const [queryParams, setQuery] = useState({})
     const [active, setActive] = useState({})
     const getInitialState = () => {
-        const value = "2.0";
-        return value;
-      }
-    const [rent_max,setRentMax]=useState(getInitialState)
+        const value = "2.0"
+        return value
+    }
+    const [rent_max, setRentMax] = useState(getInitialState)
     const handleChange = (e) => {
-        setRentMax(e.target.value);
-        setQuery({rent_max:e.target.value});
-        console.log(e.target.value);
-      };
+        setRentMax(e.target.value)
+        setQuery({ ...queryParams, rent_max: e.target.value })
+        console.log(e.target.value)
+    }
     //   useEffect(() => {
     //   const delayDebounceFn = setTimeout(() => {
     //     console.log(searchTerm)
@@ -39,12 +39,12 @@ export default () => {
                     !isDark
                         ? {
                               backgroundColor: `#ffffff`,
-                              opacity: 0.1,
+                              opacity: 0.07,
                               backgroundImage: `repeating-radial-gradient( circle at 220px 0, transparent 0, #ffffff 40px ), repeating-linear-gradient( #5082ef55, #5082ef )`,
                           }
                         : {
                               backgroundColor: "#1c1b22",
-                              opacity: 0.03,
+                              opacity: 0.08,
                               backgroundImage: `repeating-radial-gradient( circle at 2200 0, transparent 0, #000000 40px ), repeating-linear-gradient( #00000055, #1c1b22 )`,
                           }
                 }
@@ -80,46 +80,49 @@ export default () => {
 
             {/* <div className=" min-h-screen bg-gray-100 flex justify-center items-center"> */}
             <div className="w-full max-w-2xl mt-4 ">
-                <CitySearch queryParams={queryParams} setQuery={setQuery} />
-                <div className="sm:flex items-center bg-white mt-4 rounded-lg overflow-hidden px-2 py-1 justify-between">
-                    {/* <input className="text-base text-gray-600 flex-grow outline-none px-2 " type="text" placeholder="Find Properties" /> */}
+                <div className="flex flex-col bg-white border-slate-300 border rounded-lg p-4  mt-4">
+                    <CitySearch queryParams={queryParams} setQuery={setQuery} />
+                    <div className="sm:flex items-center   overflow-hidden  justify-between">
+                        {/* <input className="text-base text-gray-600 flex-grow outline-none px-2 " type="text" placeholder="Find Properties" /> */}
+                        <div className="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto mt-2">
+                            <select
+                                id="Budget"
+                                className="text-base outline-none border-slate-300 px-4 py-2 rounded-lg text-slate-600 border bg-transparent uppercase tracking-wide text-xs font-bold select-none"
+                                value={rent_max}
+                                onChange={handleChange}
+                            >
+                                <option value="">Budget</option>
+                                <option value="0.2"> &lt; 0.2 ETH</option>
+                                <option value="0.5">&lt; 0.5 ETH</option>
+                                <option value="0.7">&lt; 0.7 ETH</option>
+                                <option value="1">&lt; 1 ETH</option>
+                            </select>
+                            <select
+                                id="BHK"
+                                className="text-base outline-none border-slate-300 px-4 py-2 rounded-lg text-slate-600 border bg-transparent uppercase tracking-wide text-xs font-bold select-none"
+                            >
+                                <option value="" selected>
+                                    BHK Type
+                                </option>
+                                <option value="1">1 BHK</option>
+                                <option value="2">2 BHK</option>
+                                <option value="3">3 BHK</option>
+                                <option value="4">4 BHK</option>
+                            </select>
 
-                    <div className="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto ">
-                        <select
-                            id="Budget"
-                            className="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg"
-                            value={rent_max} onChange={handleChange}
-                        >
-                            <option value="" >
-                                Budget
-                            </option>
-                            <option value="0.2"> &lt; 0.2 ETH</option>
-                            <option value="0.5">&lt; 0.5 ETH</option>
-                            <option value="0.7">&lt; 0.7 ETH</option>
-                            <option value="1">&lt; 1 ETH</option>
-                        </select>
-                        <select
-                            id="BHK"
-                            className="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg"
-                        >
-                            <option value="" selected>
-                                BHK Type
-                            </option>
-                            <option value="1">1 BHK</option>
-                            <option value="2">2 BHK</option>
-                            <option value="3">3 BHK</option>
-                            <option value="4">4 BHK</option>
-                        </select>
-
-                        <Link
-                            href={{ pathname: "/search", query: { ...queryParams, ...active } }}
-                            className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Search
-                        </Link>
+                            <Link
+                                href={{
+                                    pathname: "/search",
+                                    query: { ...queryParams, ...active },
+                                }}
+                                className="text-white bg-blue-700 ml-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                                Search
+                            </Link>
+                        </div>
                     </div>
+                    <AdvancedOptions setActive={setActive} active={active} wide={true} />
                 </div>
-                <AdvancedOptions setActive={setActive} active={active} wide={true} />
             </div>
             {/* </div> */}
         </div>

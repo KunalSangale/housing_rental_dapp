@@ -32,12 +32,14 @@ var config = [
         prop: "isPetFriendly",
     },
 ]
-var defaultBg = "bg-slate-100  "
-var activeBg = "bg-emerald-100  "
+var defaultBg = "bg-slate-50  border-slate-300"
+// var activeBg = "bg-emerald-100  border-emerald-300"
+var activeBg = "bg-blue-100  border-blue-300"
 var disabledBg = "bg-red-100  "
 
-var defaultTxt = "text-slate-500 "
-var activeTxt = "text-emerald-800 "
+var defaultTxt = "text-slate-600 "
+// var activeTxt = "text-emerald-800 "
+var activeTxt = "text-blue-500 "
 var disabledTxt = "text-red-500 "
 export default (props) => {
     const handleClick = (i) => {
@@ -76,7 +78,7 @@ export default (props) => {
                 return (
                     <div
                         className={
-                            "flex justify-center items-center rounded-lg  h-20 cursor-pointer " +
+                            "flex justify-center items-center rounded-lg border  h-20 cursor-pointer " +
                             getString(e.prop, false)
                         }
                         onClick={() => handleClick(i)}

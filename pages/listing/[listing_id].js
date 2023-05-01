@@ -69,6 +69,7 @@ const Details = ({ item }) => {
     }, [listing_id])
     console.log(listing)
     var data = listing && listing !== undefined && listing.Listings
+    console.log(data !== null && data.listing_index)
     // console.log("m",listing.Listings.listing_index)
     console.log("index", index)
 
@@ -228,7 +229,6 @@ const Details = ({ item }) => {
                                     description={"Property ID"}
                                 ></FeatureCard>
                                 <FeatureCard
-                                    title={furnish_config[data.furnish_status - 1]}
                                     title={furnish_config[data.furnish_status - 1]}
                                     description={"Furnishing Status"}
                                 ></FeatureCard>
