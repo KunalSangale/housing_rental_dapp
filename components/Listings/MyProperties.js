@@ -187,6 +187,7 @@ export default (props) => {
                                             listing_index={e.listing_index}
                                             index={i}
                                             metadata_id={e.metadata_id}
+                                            property_id={e.property_id}
                                             address={e.sender}
                                             handleClose={togglePopup}
                                         />
