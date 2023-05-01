@@ -36,8 +36,8 @@ export default () => {
                     axios
                         .post("/getlistings", {
                             listingIndices: [
-                                ...result.activeRentIndices,
-                                ...result.activeTenantIndices,
+                                ...result.activeRentIndices.map((e) => formatUnits(e, 0)),
+                                ...result.activeTenantIndices.map((e) => formatUnits(e, 0)),
                                 ...result.proposals.map((e) => formatUnits(e.listingIndex, 0)),
                             ],
                         })

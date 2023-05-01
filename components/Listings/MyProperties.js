@@ -145,7 +145,7 @@ export default (props) => {
                                 <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     proposals
                                 </p>
-                                <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4">
+                                <div className="grid grid-cols-2 md:grid-cols-4 justify-items-start gap-x-4 gap-y-4">
                                     {trnx[i].map((proposal, index1) => {
                                         return (
                                             <div
@@ -158,7 +158,7 @@ export default (props) => {
                                                         ETH
                                                     </p>
                                                     <p className="text-6xl font-bold text-gray-700 tracking-wide block p-3 pt-0 pr-1 inline">
-                                                        {formatUnits(proposal.rentAmount, 0)}
+                                                        {formatUnits(proposal.rentAmount, 18)}
                                                     </p>
                                                     <p className="inline text-sm text-gray-600 block font-bold uppercase tracking-wider">
                                                         /pm
