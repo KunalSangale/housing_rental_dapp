@@ -2,7 +2,7 @@ import { useAccount, useContract, useSigner } from "wagmi"
 import { useEffect, useState } from "react"
 import { PulseLoader } from "react-spinners"
 import { formatUnits, parseEther, parseUnits } from "@ethersproject/units"
-
+import RentData from "./RentData"
 import contractAddress from "../../hardhat.json"
 import housingConfig from "../../../hardhat-rental/artifacts/contracts/HousingRental.sol/HousingRental.json"
 import axios from "@/axiosConfig"
@@ -19,6 +19,7 @@ export default () => {
     const [isLoading, setLoading] = useState(true)
     const [userData, setData] = useState(null)
     const [modProposals, setMod] = useState(null)
+    const [active, setActive] = useState(null)
     const [apiData, setApiData] = useState(null)
     const getUserData = (e) => {
         // e.preventDefault()
@@ -30,14 +31,22 @@ export default () => {
                     !(
                         result.activeRentIndices.length === 0 &&
                         result.activeTenantIndices.length === 0 &&
+                        result.activeResolverIndices.length === 0 &&
                         result.proposals.length == 0
                     )
                 ) {
                     axios
                         .post("/getlistings", {
                             listingIndices: [
-                                ...result.activeRentIndices.map((e) => formatUnits(e, 0)),
-                                ...result.activeTenantIndices.map((e) => formatUnits(e, 0)),
+                                ...result.activeRentIndices.map((e) =>
+                                    formatUnits(e.listingIndex, 0)
+                                ),
+                                ...result.activeTenantIndices.map((e) =>
+                                    formatUnits(e.listingIndex, 0)
+                                ),
+                                ...result.activeResolverIndices.map((e) =>
+                                    formatUnits(e.listingIndex, 0)
+                                ),
                                 ...result.proposals.map((e) => formatUnits(e.listingIndex, 0)),
                             ],
                         })
@@ -45,6 +54,10 @@ export default () => {
                             setApiData(response.data)
                             let newProp = {}
                             for (let x of response.data) {
+                                newProp[x.Listing.listing_index] = {
+                                    listing: x,
+                                    props: [],
+                                }
                                 for (let j of result.proposals) {
                                     console.log(
                                         formatUnits(j.listingIndex, 0),
@@ -55,14 +68,7 @@ export default () => {
                                         x.Listing.listing_index
                                     ) {
                                         let k = formatUnits(j.listingIndex, 0)
-                                        if (newProp[k] === undefined) {
-                                            newProp[k] = {
-                                                listing: x,
-                                                props: [j],
-                                            }
-                                        } else {
-                                            newProp[k].props.push(j)
-                                        }
+                                        newProp[k].props.push(j)
                                     }
                                 }
                             }
@@ -79,10 +85,10 @@ export default () => {
     }
     useEffect(getUserData, [signer])
     return (
-        <div className="w-full flex flex-col mt-24 px-12">
+        <div className="w-full flex flex-col mt-24 px-12 overflow-y-auto">
             {isLoading ? (
                 <PulseLoader className="mx-auto" />
-            ) : (
+            ) : active === null ? (
                 <>
                     <p className="text-3xl uppercase tracking-wide  font-bold select-none text-gray-700">
                         My Proposals
@@ -107,15 +113,69 @@ export default () => {
                             })}
                         </div>
                     ) : (
-                        <p></p>
+                        <p className="mx-auto text-center">No proposals found</p>
                     )}
                     <p className="text-3xl uppercase tracking-wide  font-bold select-none text-gray-700">
                         My Properties
                     </p>
+                    {userData.activeRentIndices.length > 0 ? (
+                        <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4 p-4">
+                            {userData.activeRentIndices.map((e, i) => {
+                                return (
+                                    <ListingContainer
+                                        e={modProposals[e.listingIndex].listing}
+                                        overwriteEth={e.rent}
+                                        overwriteLink={(e) =>
+                                            setActive({ ...e, asLandlord: true })
+                                        }
+                                    />
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        <p className="mx-auto text-center">No properties found</p>
+                    )}
                     <p className="text-3xl uppercase tracking-wide  font-bold select-none text-gray-700">
                         Rented Properties
                     </p>
+                    {userData.activeTenantIndices.length > 0 ? (
+                        <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4 p-4">
+                            {userData.activeTenantIndices.map((e, i) => {
+                                return (
+                                    <ListingContainer
+                                        e={modProposals[e.listingIndex].listing}
+                                        overwriteEth={e.rent}
+                                        overwriteLink={(e) => setActive({ ...e, asTenant: true })}
+                                    />
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        <p className="mx-auto text-center">No properties found</p>
+                    )}
+                    <p className="text-3xl uppercase tracking-wide  font-bold select-none text-gray-700">
+                        Dispute Resolution Properties
+                    </p>
+                    {userData.activeResolverIndices.length > 0 ? (
+                        <div className="grid grid-cols-2 md:grid-cols-6 justify-items-start gap-x-4 gap-y-4 p-4">
+                            {userData.activeResolverIndices.map((e, i) => {
+                                return (
+                                    <ListingContainer
+                                        e={modProposals[e.listingIndex].listing}
+                                        overwriteEth={e.rent}
+                                        overwriteLink={(e) =>
+                                            setActive({ ...e, asResolver: true })
+                                        }
+                                    />
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        <p className="mx-auto text-center">No properties found</p>
+                    )}
                 </>
+            ) : (
+                active && <RentData active={active} />
             )}
         </div>
     )

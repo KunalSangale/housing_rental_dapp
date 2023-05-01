@@ -29,7 +29,7 @@ const Popup = (props) => {
             Date.parse(data.get("start_date")) / 1000,
             data.get("months"),
             parseEther(data.get("eth_rent")),
-            parseInt(data.get("eth_deposit")),
+            parseEther(data.get("eth_deposit")),
             "xya"
             // (listingIndex = props.listing_index),
             // (index = props.index),

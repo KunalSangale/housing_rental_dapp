@@ -36,14 +36,21 @@ export default (props) => {
                 className=" object-cover h-full w-60 absolute rounded-md"
             />
             <Link
-                href={{
-                    pathname: "/listing/" + props.e.Listing.metadata_id,
-                }}
+                href={
+                    props.overwriteLink === undefined
+                        ? {
+                              pathname: "/listing/" + props.e.Listing.metadata_id,
+                          }
+                        : "#"
+                }
+                onClick={() => props.overwriteLink !== undefined && props.overwriteLink(props.e)}
                 className="bg-gradient-to-t from-[black] from-10% to-60% to-transparent pt-32 rounded-md w-60 h-60 absolute cursor-inter hover:to-black opacity-[0.63]"
             ></Link>
             <div className="relative mt-32">
                 <p className="text-5xl font-bold text-white tracking-wide block ml-4 pt-0 opacity-100 inline truncate">
-                    {formatUnits(props.e.Listing.eth_rent, 0)}
+                    {props.overwriteEth !== undefined
+                        ? formatUnits(props.overwriteEth, 18)
+                        : props.e.Listing.eth_rent}
                 </p>
                 <p className="text-white font-bold ml-1 text-xs inline">ETH</p>
                 <p className="text-xs font-bold text-white tracking-wide block pt-0 ml-4 truncate ">
