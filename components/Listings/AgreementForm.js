@@ -64,7 +64,13 @@ const Popup = (props) => {
                         "xya"
                     )
                     console.log(transactionRes)
-                    return transactionRes.wait(1)
+                    return (
+                        transactionRes.wait(1),
+                        fetch("http://localhost/api/delist", {
+                            method: "PUT",
+                            body: props.property_id.toString(),
+                        }).then((res) => res.json())
+                    )
                 }
             })
             .then((e) => {

@@ -16,10 +16,15 @@ export default () => {
         return value
     }
     const [rent_max, setRentMax] = useState(getInitialState)
-    const handleChange = (e) => {
+    const [bhk, setBhk] = useState(0)
+    const handleBudgetChange = (e) => {
         setRentMax(e.target.value)
         setQuery({ ...queryParams, rent_max: e.target.value })
         console.log(e.target.value)
+    }
+    const handleBhkChange = (e) => {
+        setBhk(e.target.value)
+        setQuery({ ...queryParams, bhk_min: e.target.value })
     }
     //   useEffect(() => {
     //   const delayDebounceFn = setTimeout(() => {
@@ -89,7 +94,7 @@ export default () => {
                                 id="Budget"
                                 className="text-base outline-none border-slate-300 px-4 py-2 rounded-lg text-slate-600 border bg-transparent uppercase tracking-wide text-xs font-bold select-none"
                                 value={rent_max}
-                                onChange={handleChange}
+                                onChange={handleBudgetChange}
                             >
                                 <option value="">Budget</option>
                                 <option value="0.2"> &lt; 0.2 ETH</option>
@@ -100,10 +105,10 @@ export default () => {
                             <select
                                 id="BHK"
                                 className="text-base outline-none border-slate-300 px-4 py-2 rounded-lg text-slate-600 border bg-transparent uppercase tracking-wide text-xs font-bold select-none"
+                                value={bhk}
+                                onChange={handleBhkChange}
                             >
-                                <option value="" selected>
-                                    BHK Type
-                                </option>
+                                <option value="">BHK Type</option>
                                 <option value="1">1 BHK</option>
                                 <option value="2">2 BHK</option>
                                 <option value="3">3 BHK</option>
