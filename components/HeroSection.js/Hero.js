@@ -50,7 +50,7 @@ export default () => {
                 }
             ></div>
             <p className="font-extrabold text-5xl text-slate-800 mt-60 m-4 z-2 dark:text-slate-100">
-                Decentralized Housing Rental Platform
+                Blockchain based Housing Rental Platform
             </p>
 
             {/* <div className="w-full max-w-2xl mt-4">
