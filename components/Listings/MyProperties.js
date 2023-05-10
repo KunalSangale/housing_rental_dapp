@@ -8,6 +8,7 @@ import { formatUnits } from "@ethersproject/units"
 import { addressShorten } from "@/utils"
 import { useRouter } from "next/navigation"
 import AgrementForm from "./AgreementForm"
+import Link from "next/link"
 export default (props) => {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -185,7 +186,7 @@ export default (props) => {
                                                             /pm
                                                         </p>
                                                     </div>
-                                                    <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-3">
+                                                    <div className="w-full h-16 bg-slate-100 rouned-lg flex flex-col p-4">
                                                         <p className="text-sm font-bold text-gray-600 tracking-wide block">
                                                             BY {addressShorten(proposal.sender)}
                                                         </p>
@@ -193,13 +194,21 @@ export default (props) => {
                                                             {formatUnits(proposal.months, 0)}{" "}
                                                             months
                                                         </p>
+                                                        <Link
+                                                            href="https://chat.blockscan.com/start"
+                                                            rel="noopener noreferrer"
+                                                            target="_blank"
+                                                            className="bg-blue-500 h-fit px-8 py-2 mt-2 text-white rounded-md font-bold uppercase tracking-wide text-xs"
+                                                        >
+                                                            Chat on Blockscan
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </>
                                         )
                                     })}
                                     <button
-                                        className="block space-y-2 flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-48 flex rounded-lg border hover:bg-slate-100"
+                                        className="block space-y-2 flex flex-col items-center justify-center uppercase tracking-wide text-gray-700 text-xs font-bold bg-slate-50 w-60 h-60 flex rounded-lg border hover:bg-slate-100"
                                         onClick={() => getProposals(e.listing_index, i)}
                                     >
                                         <ArrowPathIcon className="h-12 w-12 text-gray-700" />
