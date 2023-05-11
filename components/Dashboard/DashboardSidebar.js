@@ -1,7 +1,6 @@
 const tabs = [
     { label: "Active", value: 0 },
     { label: "Listings & Properties", value: 1 },
-    { label: "Disputes", value: 2 },
 ]
 const activeCss = "bg-blue-50 text-blue-500"
 const inactiveCss = "text-slate-600 hover:bg-slate-100 "

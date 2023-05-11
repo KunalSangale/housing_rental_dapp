@@ -160,7 +160,7 @@ export default (props) => {
                                                 {isOpen && (
                                                     <AgrementForm
                                                         listing_index={e.listing_index}
-                                                        index={i}
+                                                        index={index1}
                                                         metadata_id={e.metadata_id}
                                                         property_id={e.property_id}
                                                         address={e.sender}
