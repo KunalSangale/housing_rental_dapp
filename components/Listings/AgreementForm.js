@@ -95,7 +95,7 @@ const Popup = (props) => {
                                 name="eth_rent"
                                 type="number"
                                 min="0"
-                                step=".01"
+                                step=".00001"
                                 placeholder="Enter rent in ETH"
                                 required
                             />
@@ -112,7 +112,7 @@ const Popup = (props) => {
                                 name="eth_deposit"
                                 type="number"
                                 min="0"
-                                step=".01"
+                                step=".00001"
                                 placeholder="Enter deposit in ETH"
                                 required
                             />

@@ -292,7 +292,7 @@ export default (props) => {
                             name="eth_rent"
                             type="number"
                             min="0"
-                            step=".01"
+                            step=".00001"
                             placeholder="Enter rent in ETH"
                         />
                     </div>
@@ -308,7 +308,7 @@ export default (props) => {
                             name="eth_deposit"
                             type="number"
                             min="0"
-                            step=".01"
+                            step=".00001"
                             placeholder="Enter deposit in ETH"
                         />
                     </div>
